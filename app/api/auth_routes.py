@@ -33,6 +33,17 @@ def login():
         return user.to_dict()
     return form.errors, 401
 
+@auth_routes.route('/login/demo', methods=['POST'])
+def demo_login():
+    """
+    Logs in a demo user
+    """
+    demo_user = User.query.filter(User.username == "Demo").first()
+    if demo_user:
+        login_user(demo_user)
+        return demo_user.to_dict()
+    return {'errors': {'message': 'Demo user not found'}}, 404
+
 
 @auth_routes.route('/logout')
 def logout():
@@ -40,7 +51,7 @@ def logout():
     Logs a user out
     """
     logout_user()
-    return {'message': 'User logged out'}
+    return {'message': 'User logged out', 'redirect': '/'}
 
 
 @auth_routes.route('/signup', methods=['POST'])
