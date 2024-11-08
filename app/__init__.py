@@ -11,6 +11,8 @@ from .seeds import seed_commands
 from .config import Config
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
+SQLALCHEMY_DATABASE_URI = os.environ.get(
+        'DATABASE_URL')
 
 # Setup login manager
 login = LoginManager(app)
