@@ -1,10 +1,6 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
-
-app = Flask(__name__)
-db = SQLAlchemy(app)
+from .db import db
+from app import app_context
 
 class Project(db.Model):
     __tablename__ = 'Projects'
@@ -27,5 +23,5 @@ class Project(db.Model):
             "category_id": self.category_id
         }
 
-with app.app_context():
+with app_context:
     db.create_all()

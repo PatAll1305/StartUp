@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from app import db, seed_commands
+from app import db, app
 from models import Project
 
 seed_projects = [
@@ -165,7 +165,7 @@ seed_projects = [
     }
 ]
 
-with app_context():
+with app.app_context():
     for seed in seed_projects:
         project = Project(
             user_id=seed["user_id"],
