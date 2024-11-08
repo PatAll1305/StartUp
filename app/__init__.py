@@ -26,8 +26,8 @@ def load_user(id):
 
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
-
 app.config.from_object(Config)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 db.init_app(app)
@@ -35,6 +35,8 @@ Migrate(app, db)
 
 # Application Security
 CORS(app)
+
+print(os.environ.get('DATABASE_URL'))
 
 @app.before_request
 def https_redirect():
