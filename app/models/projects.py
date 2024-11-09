@@ -1,9 +1,6 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
-app = Flask(__name__)
-db = SQLAlchemy(app)
+from .db import db
+from app import app_context
 
 class Project(db.Model):
     __tablename__ = 'Projects'
@@ -15,8 +12,16 @@ class Project(db.Model):
     deadline = db.Column(db.DateTime, nullable=False, default=datetime.now())
     category_id = db.Column(db.Integer, db.ForeignKey('Categories.id'), nullable=False)
 
-    def __repr__(self):
-        return f"<Project {self.title}>"
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "title": self.title,
+            "description": self.description,
+            "goal": float(self.goal),
+            "deadline": self.deadline.isoformat(),
+            "category_id": self.category_id
+        }
 
-with app.app_context():
+with app_context:
     db.create_all()
