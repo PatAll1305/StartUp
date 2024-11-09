@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from app import db, app
+from app import app
 from sqlalchemy.sql import text
 from app.models import db, Project, environment, SCHEMA
 

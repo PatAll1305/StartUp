@@ -32,6 +32,11 @@ login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
 
 
+def register_commands(app):
+    app.cli.add_command(seed_commands)  
+
+register_commands(app)
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
