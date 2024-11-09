@@ -7,25 +7,20 @@ import AuthLayout from "./AuthLayout";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />, // Layout with the navigation bar
+    element: <Layout />, // Layout with reg navbar
     children: [
-      {
-        index: true,
-        element: <h1>Welcome!</h1>,
-      },
       // Other routes that need the navbar
     ],
   },
   {
-    path: "/", // Layout without the navigation bar
-    element: <AuthLayout />,
+    element: <AuthLayout />, // Layout without reg navbar
     children: [
       {
-        path: "login",
+        path: "/login",
         element: <LoginFormPage />,
       },
       {
-        path: "signup",
+        path: "/signup",
         element: <SignupFormPage />,
       },
     ],
