@@ -3,7 +3,7 @@ from models import db, Project
 from datetime import datetime
 from functools import wraps
 
-project_bp = Blueprint('projects', __name__)
+project_routes = Blueprint('projects', __name__)
 
 def check_project_ownership(func):
     @wraps(func)
@@ -24,7 +24,7 @@ def check_project_ownership(func):
         return func(*args, **kwargs)
     return wrapper
 
-@project_bp.route('/api/projects', methods=['POST'])
+@project_routes.route('/', methods=['POST'])
 def create_project():
     data = request.get_json()
     new_project = Project(
@@ -39,17 +39,17 @@ def create_project():
     db.session.commit()
     return jsonify(new_project.to_dict()), 201
 
-@project_bp.route('/api/projects', methods=['GET'])
+@project_routes.route('/', methods=['GET'])
 def get_projects():
     projects = Project.query.all()
     return jsonify([project.to_dict() for project in projects])
 
-@project_bp.route('/api/projects/<int:id>', methods=['GET'])
+@project_routes.route('/<int:id>', methods=['GET'])
 def get_project(id):
     project = Project.query.get_or_404(id)
     return jsonify(project.to_dict())
 
-@project_bp.route('/api/projects/<int:id>', methods=['PUT'])
+@project_routes.route('/<int:id>', methods=['PUT'])
 @check_project_ownership()
 def update_project(id):
     project = Project.query.get_or_404(id)
@@ -62,7 +62,7 @@ def update_project(id):
     db.session.commit()
     return jsonify(project.to_dict())
 
-@project_bp.route('/api/projects/<int:id>', methods=['DELETE'])
+@project_routes.route('/<int:id>', methods=['DELETE'])
 @check_project_ownership()
 def delete_project(id):
     project = Project.query.get_or_404(id)
@@ -70,12 +70,4 @@ def delete_project(id):
     db.session.commit()
     return jsonify({"message": "Project deleted"}), 204
 
-@project_bp.route('/api/users/<int:user_id>/projects', methods=['GET'])
-def get_projects_by_user(user_id):
-    projects = Project.query.filter_by(user_id=user_id).all()
-    return jsonify([project.to_dict() for project in projects])
 
-@project_bp.route('/api/categories/<int:category_id>/projects', methods=['GET'])
-def get_projects_by_category(category_id):
-    projects = Project.query.filter_by(category_id=category_id).all()
-    return jsonify([project.to_dict() for project in projects])
