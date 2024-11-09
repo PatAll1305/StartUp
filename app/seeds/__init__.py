@@ -1,7 +1,8 @@
 from flask.cli import AppGroup
+from app.models import db, environment, SCHEMA
+from sqlalchemy.sql import text
 from .users import seed_users, undo_users
-
-from app.models.db import db, environment, SCHEMA
+from .projects import seed_projects, undo_projects
 
 seed_commands = AppGroup('seed')
 
@@ -10,8 +11,10 @@ def seed():
     if environment == 'production':
        
 
+        undo_projects()
         undo_users()
     seed_users()
+    seed_projects
    
 
 

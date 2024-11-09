@@ -11,7 +11,19 @@ from .api.project_routes import project_routes
 from .seeds import seed_commands
 from .config import Config
 
-app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
+def create_app():
+    app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
+    app.config.from_object(Config)
+
+    db.init_app(app)
+
+    with app.app_context():
+        db.create_all()
+
+    return app
+
+app = create_app()
+
 SQLALCHEMY_DATABASE_URI = os.environ.get(
         'DATABASE_URL')
 

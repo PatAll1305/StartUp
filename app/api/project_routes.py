@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models import db, Project
+from ..models import db, Project
 from datetime import datetime
 from functools import wraps
 
@@ -50,7 +50,7 @@ def get_project(id):
     return jsonify(project.to_dict())
 
 @project_routes.route('/<int:id>', methods=['PUT'])
-@check_project_ownership()
+@check_project_ownership
 def update_project(id):
     project = Project.query.get_or_404(id)
     data = request.get_json()
@@ -63,7 +63,7 @@ def update_project(id):
     return jsonify(project.to_dict())
 
 @project_routes.route('/<int:id>', methods=['DELETE'])
-@check_project_ownership()
+@check_project_ownership
 def delete_project(id):
     project = Project.query.get_or_404(id)
     db.session.delete(project)

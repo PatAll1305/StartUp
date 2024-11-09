@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from app import db, app
-from models import Project
+from sqlalchemy.sql import text
+from app.models import db, Project, environment, SCHEMA
 
 seed_projects = [
     {
@@ -164,10 +165,10 @@ seed_projects = [
         "category_id": 7
     }
 ]
-
-with app.app_context():
-    for seed in seed_projects:
-        project = Project(
+def seed_projects():
+    with app.app_context():
+        for seed in seed_projects:
+         project = Project(
             user_id=seed["user_id"],
             title=seed["title"],
             description=seed["description"],
@@ -176,5 +177,13 @@ with app.app_context():
             category_id=seed["category_id"]
         )
         db.session.add(project)
+    db.session.commit()
+
+def undo_projects():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM projects"))
+
     db.session.commit()
 
