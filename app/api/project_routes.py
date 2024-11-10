@@ -10,9 +10,11 @@ def check_project_ownership(func):
     def wrapper(*args, **kwargs):
         project_id = kwargs.get('id')
         user_id = request.headers.get('user_id')
+        if user_id == None:
+            user_id = request.cookies.get('user_id')
 
         if not user_id:
-            return jsonify({"error": "User ID is required in headers"}), 401
+            return jsonify({"error": "User ID is required in headers or as a cookie"}), 401
 
         project = Project.query.get(project_id)
         if project is None:
