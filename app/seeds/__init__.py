@@ -2,7 +2,6 @@ from flask.cli import AppGroup
 from ..models import environment
 from .users import seed_users, undo_users
 from .projects import seed_projects, undo_projects
-from app import app
 
 seed_commands = AppGroup('seed')
 

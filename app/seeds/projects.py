@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from app import app
+from flask import current_app
 from sqlalchemy.sql import text
 from app.models import db, Project, environment, SCHEMA
 
@@ -166,7 +166,7 @@ seed_projects = [
     }
 ]
 def seed_projects():
-    with app.app_context():
+    with current_app.app_context():
         for seed in seed_projects:
          project = Project(
             user_id=seed["user_id"],
@@ -178,6 +178,8 @@ def seed_projects():
         )
         db.session.add(project)
     db.session.commit()
+
+seed_projects()
 
 def undo_projects():
     if environment == "production":
