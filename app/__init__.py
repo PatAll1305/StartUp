@@ -32,11 +32,6 @@ login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
 
 
-def register_commands(app):
-    app.cli.add_command(seed_commands)  
-
-register_commands(app)
-
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
@@ -99,7 +94,8 @@ def react_root(path):
     or index.html requests
     """
     if path == 'favicon.ico':
-        return app.send_from_directory('public', 'favicon.ico')
+        response = app.send_from_directory('public', 'favicon.ico')
+        return inject_csrf_token(response)
     return app.send_static_file('index.html')
 
 

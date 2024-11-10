@@ -20,4 +20,3 @@ def undo():
     """Undo all seeded data."""
     undo_projects()
     undo_users()
-

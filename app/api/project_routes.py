@@ -10,9 +10,11 @@ def check_project_ownership(func):
     def wrapper(*args, **kwargs):
         project_id = kwargs.get('id')
         user_id = request.headers.get('user_id')
+        if user_id == None:
+            user_id = request.cookies.get('user_id')
 
         if not user_id:
-            return jsonify({"error": "User ID is required in headers"}), 401
+            return jsonify({"error": "User ID is required in headers or as a cookie"}), 401
 
         project = Project.query.get(project_id)
         if project is None:
@@ -54,12 +56,21 @@ def get_project(id):
 def update_project(id):
     project = Project.query.get_or_404(id)
     data = request.get_json()
+    
     project.title = data.get('title', project.title)
     project.description = data.get('description', project.description)
     project.goal = data.get('goal', project.goal)
-    project.deadline = datetime.fromisoformat(data['deadline']) if 'deadline' in data else project.deadline
+    
+    if 'deadline' in data:
+        try:
+            project.deadline = datetime.strptime(data['deadline'], "%Y-%m-%d %H:%M:%S.%f")
+        except ValueError:
+            project.deadline = datetime.strptime(data['deadline'], "%Y-%m-%d %H:%M:%S")
+
     project.category_id = data.get('category_id', project.category_id)
+    
     db.session.commit()
+    
     return jsonify(project.to_dict())
 
 @project_routes.route('/<int:id>', methods=['DELETE'])
