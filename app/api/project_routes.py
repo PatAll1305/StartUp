@@ -54,12 +54,21 @@ def get_project(id):
 def update_project(id):
     project = Project.query.get_or_404(id)
     data = request.get_json()
+    
     project.title = data.get('title', project.title)
     project.description = data.get('description', project.description)
     project.goal = data.get('goal', project.goal)
-    project.deadline = datetime.fromisoformat(data['deadline']) if 'deadline' in data else project.deadline
+    
+    if 'deadline' in data:
+        try:
+            project.deadline = datetime.strptime(data['deadline'], "%Y-%m-%d %H:%M:%S.%f")
+        except ValueError:
+            project.deadline = datetime.strptime(data['deadline'], "%Y-%m-%d %H:%M:%S")
+
     project.category_id = data.get('category_id', project.category_id)
+    
     db.session.commit()
+    
     return jsonify(project.to_dict())
 
 @project_routes.route('/<int:id>', methods=['DELETE'])

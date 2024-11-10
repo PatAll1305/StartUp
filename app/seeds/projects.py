@@ -3,7 +3,7 @@ from flask import current_app
 from sqlalchemy.sql import text
 from app.models import db, Project, environment, SCHEMA
 
-seed_projects = [
+seed_project_data = [
     {
         "user_id": 1,
         "title": "Project Alpha",
@@ -167,19 +167,22 @@ seed_projects = [
 ]
 def seed_projects():
     with current_app.app_context():
-        for seed in seed_projects:
-         project = Project(
-            user_id=seed["user_id"],
-            title=seed["title"],
-            description=seed["description"],
-            goal=seed["goal"],
-            deadline=seed["deadline"],
-            category_id=seed["category_id"]
-        )
-        db.session.add(project)
-    db.session.commit()
-
-seed_projects()
+        try:
+            for seed in seed_project_data:
+                project = Project(
+                    user_id=seed["user_id"],
+                    title=seed["title"],
+                    description=seed["description"],
+                    goal=seed["goal"],
+                    deadline=seed["deadline"],
+                    category_id=seed["category_id"]
+                )
+                print(project)
+                db.session.add(project)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error during commit: {e}")
 
 def undo_projects():
     if environment == "production":

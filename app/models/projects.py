@@ -1,14 +1,18 @@
 from datetime import datetime
-from .db import db
+from .db import db, environment, SCHEMA
 
 class Project(db.Model):
-    __tablename__ = 'Projects'
+    __tablename__ = 'projects'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, nullable=False)
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
     goal = db.Column(db.Numeric(10, 2), nullable=False)
-    deadline = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    deadline = db.Column(db.DateTime, default=datetime.now())
     category_id = db.Column(db.Integer, nullable=False)
 
     def to_dict(self):
