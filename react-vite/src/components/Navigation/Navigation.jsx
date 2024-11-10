@@ -1,24 +1,36 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import OpenModalMenuItem from "./OpenModalMenuItem";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+// import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+// import OpenModalMenuItem from "./OpenModalMenuItem";
+// import LoginFormModal from "../LoginFormModal";
+// import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 
 function Navigation() {
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showSignupModal, setShowSignupModal] = useState(false);
+  // const [showLoginModal, setShowLoginModal] = useState(false);
+  // const [showSignupModal, setShowSignupModal] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
+
+  const handleStartProjectClick = () => {
+    alert("This feature is coming soon!");
+    // navigate("/StartProject"); 
+  };
 
   return (
-    <ul>
+    <ul className="navlist-navigation">
       <li>
-        <NavLink to="/">Kickstarter</NavLink>
+        <NavLink className="navigation-startup" to="/">StartUp</NavLink>
       </li>
       <li>
-        <div className="relative smart-input-group">
-          <input
-            className="atomic-text-input border-none"
-            id="global-nav-search-input"
+        <div className="search-bar">
+          <button type="submit" className="search-button">
+            <i className="fas fa-search"></i>
+          </button>
+          <input 
             placeholder="Search projects, creators, and categories"
             type="text"
             value=""
@@ -27,31 +39,15 @@ function Navigation() {
       </li>
       <li className="right-side">
         <button
-            className="auth-button"
-            onClick={() => setShowLoginModal(true)}
-          >
-            Log In
-          </button>
-          {showLoginModal && (
-            <OpenModalMenuItem
-              itemText="Log In"
-              onItemClick={() => setShowLoginModal(false)}
-              modalComponent={<LoginFormModal />}
-            />
-          )}
-        <button
           className="auth-button"
-          onClick={() => setShowSignupModal(true)}
-        >
-          Sign Up
+          onClick={handleStartProjectClick}>
+            Start a Project
         </button>
-        {showSignupModal && (
-          <OpenModalMenuItem
-            itemText="Sign Up"
-            onItemClick={() => setShowSignupModal(false)}
-            modalComponent={<SignupFormModal />}
-          />
-        )}
+        <button 
+          className="auth-button" 
+          onClick={handleLoginClick}>
+            Log In
+        </button>
       </li>
     </ul>
   );

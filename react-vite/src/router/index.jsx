@@ -2,21 +2,25 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
+import AuthLayout from "./AuthLayout";
 
 export const router = createBrowserRouter([
   {
-    element: <Layout />,
+    path: "/",
+    element: <Layout />, // Layout with reg navbar
+    children: [
+      // Other routes that need the navbar
+    ],
+  },
+  {
+    element: <AuthLayout />, // Layout without reg navbar
     children: [
       {
-        path: "/",
-        element: <h1>Welcome!</h1>,
-      },
-      {
-        path: "login",
+        path: "/login",
         element: <LoginFormPage />,
       },
       {
-        path: "signup",
+        path: "/signup",
         element: <SignupFormPage />,
       },
     ],
