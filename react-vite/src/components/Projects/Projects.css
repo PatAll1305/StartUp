@@ -1,0 +1,50 @@
+.projects-list {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.project-item-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+
+    :hover {
+        cursor: pointer;
+    }
+}
+
+.project-item h2 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.project-item p {
+    margin: 5px 0;
+}
+
+#project-details {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#project-details img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+#no-project {
+    text-align: center;
+    padding: 50px 0;
+}
+
+#project-details h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
