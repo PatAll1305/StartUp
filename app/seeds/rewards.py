@@ -143,34 +143,110 @@ def seed_rewards():
         pledge=25.00,
         name='Art Print',
         content='Receive a limited-edition art print from the project.'
+    ),
+    reward25 = Reward(
+        project_id=13,
+        pledge=10.00,
+        name='Digital Poster',
+        content='A high-resolution digital poster of the project.'
+    )
+    reward26 = Reward(
+        project_id=13,
+        pledge=40.00,
+        name='Exclusive Mug',
+        content='An exclusive project-branded coffee mug.'
+    )
+    reward27 = Reward(
+        project_id=14,
+        pledge=15.00,
+        name='Personalized Video Message',
+        content='Receive a personalized thank you video from the creator.'
+    )
+    reward28 = Reward(
+        project_id=14,
+        pledge=70.00,
+        name='Collector’s T-shirt',
+        content='A limited-edition project-themed t-shirt.'
+    )
+    reward29 = Reward(
+        project_id=15,
+        pledge=5.00,
+        name='Exclusive Badge',
+        content='Receive a digital badge to display on your profile.'
+    )
+    reward30 = Reward(
+        project_id=15,
+        pledge=100.00,
+        name='Signed Limited Edition Print',
+        content='A limited edition art print, signed by the creator.'
+    )
+    reward31 = Reward(
+        project_id=16,
+        pledge=20.00,
+        name='Handwritten Letter',
+        content='A handwritten letter of appreciation from the creator.'
+    )
+    reward32 = Reward(
+        project_id=16,
+        pledge=120.00,
+        name='VIP Backer Experience',
+        content='Receive access to a special backer experience with exclusive content.'
+    )
+    reward33 = Reward(
+        project_id=17,
+        pledge=30.00,
+        name='Digital Art Pack',
+        content='A collection of digital artwork related to the project.'
+    )
+    reward34 = Reward(
+        project_id=17,
+        pledge=80.00,
+        name='Signed Album',
+        content='A signed copy of the album associated with the project.'
+    )
+    reward35 = Reward(
+        project_id=18,
+        pledge=25.00,
+        name='Thank You Video',
+        content='A personal thank you video from the project team.'
+    )
+    reward36 = Reward(
+        project_id=18,
+        pledge=90.00,
+        name='VIP Event Ticket',
+        content='Ticket to a virtual VIP event with the creator.'
+    )
+    reward37 = Reward(
+        project_id=19,
+        pledge=15.00,
+        name='Project Keychain',
+        content='A custom keychain inspired by the project.'
+    )
+    reward38 = Reward(
+        project_id=19,
+        pledge=60.00,
+        name='Limited Edition Notebook',
+        content='A limited edition project-branded notebook.'
+    )
+    reward39 = Reward(
+        project_id=20,
+        pledge=50.00,
+        name='Backstage Pass',
+        content='Access to behind-the-scenes project updates and content.'
+    )
+    reward40 = Reward(
+        project_id=20,
+        pledge=200.00,
+        name='Framed Artwork',
+        content='A framed piece of artwork from the project.'
     )
 
     db.session.add_all(
         [
-            reward1,
-            reward2,
-            reward3,
-            reward4,
-            reward5,
-            reward6,
-            reward7,
-            reward8,
-            reward9,
-            reward10,
-            reward11,
-            reward12,
-            reward13,
-            reward14,
-            reward15,
-            reward16,
-            reward17,
-            reward18,
-            reward19,
-            reward20,
-            reward21,
-            reward22,
-            reward23,
-            reward24
+            reward1, reward2, reward3, reward4, reward5, reward6, reward7, reward8, reward9, reward10,
+            reward11, reward12, reward13, reward14, reward15, reward16, reward17, reward18, reward19, reward20,
+            reward21, reward22, reward23, reward24, reward25, reward26, reward27, reward28, reward29, reward30,
+            reward31, reward32, reward33, reward34, reward35, reward36, reward37, reward38, reward39, reward40
         ]
     )
     db.session.commit()
