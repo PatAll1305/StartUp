@@ -2,6 +2,8 @@ from flask.cli import AppGroup
 from ..models import environment
 from .users import seed_users, undo_users
 from .projects import seed_projects, undo_projects
+from .rewards import seed_rewards, undo_rewards
+from .categories import seed_categories, undo_categories
 from .backedProjects import seed_backedProjects, undo_backedProjects
 
 seed_commands = AppGroup('seed')
@@ -13,10 +15,9 @@ def seed():
         undo_backedProjects
         undo_projects()
         undo_users()
-    
-    seed_users()     
+
+    seed_users()
     seed_projects()
-    seed_backedProjects()
 
 @seed_commands.command('undo')
 def undo():
@@ -24,4 +25,3 @@ def undo():
     undo_backedProjects
     undo_projects()
     undo_users()
-    
