@@ -1,4 +1,3 @@
-from datetime import datetime
 from .db import db, environment, SCHEMA
 
 class BackedProject(db.Model):
