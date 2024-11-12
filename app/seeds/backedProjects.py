@@ -1,7 +1,7 @@
 from app.models import db, BackedProject, environment, SCHEMA
 from sqlalchemy.sql import text
 
-def seed_backed_projects():
+def seed_backedProjects():
   backed_projects = [
     BackedProject(user_id=1, project_id=1, reward_id=2),
     BackedProject(user_id=2, project_id=1, reward_id=1),
@@ -30,7 +30,7 @@ def seed_backed_projects():
 
   db.session.commit()
 
-def undo_backed_projects():
+def undo_backedProjects():
     if environment == "production":
       db.session.execute(f"TRUNCATE table {SCHEMA}.backed_projects RESTART IDENTITY CASCADE;")
     else:

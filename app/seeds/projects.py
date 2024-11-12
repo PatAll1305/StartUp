@@ -272,11 +272,16 @@ def seed_projects():
         try:
             for seed in seed_project_data:
                 project = Project(
+                    amount=seed["amount"],
                     user_id=seed["user_id"],
                     title=seed["title"],
                     description=seed["description"],
+                    body=seed["body"],
                     goal=seed["goal"],
+                    location=seed["location"],
+                    media_url=seed["media_url"],
                     deadline=seed["deadline"],
+                    backers=seed["backers"],
                     category_id=seed["category_id"]
                 )
                 print(project)

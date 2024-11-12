@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
+import { Projects, ProjectsById } from '../components/Projects/index'
 import Layout from './Layout';
 import AuthLayout from "./AuthLayout";
 
@@ -23,6 +24,14 @@ export const router = createBrowserRouter([
         path: "/signup",
         element: <SignupFormPage />,
       },
+      {
+        path: "/projects",
+        element: <Projects />
+      },
+      {
+        path: "/projects/:projectId",
+        element: <ProjectsById />
+      }
     ],
   },
 ]);

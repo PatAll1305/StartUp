@@ -18,13 +18,20 @@ def seed_categories():
     category14 = Category(id = 14, title='Theater')
     category15 = Category(id=15, title='Discover')
 
-    db.session.add_all([category1, category2, category3, category4, category5, category6, category7, category8, category9, category10, category11, category12, category13, category14, category15])
-    db.session.commit
+    db.session.add_all(
+        [
+            category1, category2, category3, category4, category5,
+            category6, category7, category8, category9, category10,
+            category11, category12, category13, category14, category15
+        ]
+    )
+    db.session.commit()
 
 
 def undo_categories():
     if environment == 'production':
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.categories RESTART IDENTITY CASCADE;")
+
     else:
         db.session.execute(text("DELETE FROM categories"))
 

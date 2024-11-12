@@ -23,7 +23,11 @@ function Navigation() {
   return (
     <ul className="navlist-navigation">
       <li>
+<<<<<<< HEAD
         <NavLink className="navigation-startup" to="/">StartUp</NavLink>
+=======
+        <NavLink to="/">StartUp</NavLink>
+>>>>>>> dev
       </li>
       <li>
         <div className="search-bar">
@@ -39,6 +43,22 @@ function Navigation() {
       </li>
       <li className="right-side">
         <button
+<<<<<<< HEAD
+=======
+          className="auth-button"
+          onClick={() => setShowLoginModal(true)}
+        >
+          Log In
+        </button>
+        {showLoginModal && (
+          <OpenModalMenuItem
+            itemText="Log In"
+            onItemClick={() => setShowLoginModal(false)}
+            modalComponent={<LoginFormModal />}
+          />
+        )}
+        <button
+>>>>>>> dev
           className="auth-button"
           onClick={handleStartProjectClick}>
             Start a Project
