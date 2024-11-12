@@ -12,27 +12,28 @@ export default function Projects() {
         dispatch(fetchProjects());
     }, [dispatch]);
 
-    if (!projects.length) return <p>Loading projects...</p>;
+    if (!projects.length) return <h1 className='loading'>Loading projects...</h1>;
 
     return (
         <div className="projects-list">
-            <h1>Projects</h1>
+            <h1 id='projects-list-title'>Projects</h1>
             <ul className='project-item-list'>
                 {projects.map((project) => (
-                    <li key={project.id} className="project-item" onClick={(e) => {
+                    <div key={project.id} className='project-item' onClick={(e) => {
                         e.preventDefault()
                         navigate(`/projects/${project.id}`)
                     }}>
-                        <h2>{project.title}</h2>
-                        <p>Description: {project.description}</p>
-                        <p>Goal: ${project.goal.toFixed(2)}</p>
-                        <p>Location: {project.location}</p>
-                        <p>Deadline: {new Date(project.deadline).toLocaleDateString()}</p>
-                        <p>Backers: {project.backers}</p>
                         {project.media_url && (
-                            <img src={project.media_url} alt={`${project.title} media`} />
+                            <img className='project-media' src={project.media_url} alt={`${project.title} media`} />
                         )}
-                    </li>
+                        <li >
+                            <h4>{project.title}</h4>
+                            <p style={{ color: parseFloat(project.goal) - parseFloat(project.amount) > 5000 ? 'red' : parseFloat(project.goal) <= parseFloat(project.amount) ? 'green' : "orange" }}>
+                                Goal <br /> ${project.goal.toFixed(2)}</p>
+                            <p>Deadline:<br />{new Date(project.deadline).toLocaleDateString()}</p>
+
+                        </li>
+                    </div>
                 ))}
             </ul>
         </div>

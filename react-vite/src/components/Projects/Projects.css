@@ -1,12 +1,70 @@
-.projects-list {
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 400px;
+}
+
+.project-item-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+#projects-list {
     padding: 20px;
     max-width: 800px;
     margin: 0 auto;
 }
 
-.project-item-list {
+#projects-list-title {
     display: flex;
-    flex-direction: column;
+    justify-self: center;
+}
+
+.project-item {
+    display: flex;
+    background-color: #f7f6f6;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    align-content: center;
+    justify-content: center;
+    height: 250px;
+
+    img {
+        width: 50%;
+        height: 90%;
+    }
+
+    li {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: 90%;
+        justify-content: space-evenly;
+    }
+
+}
+
+.project-item:hover {
+    transform: translateY(-5px);
+}
+
+.project-item h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.project-item p {
+    margin: 5px 0;
+}
+
+.project-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
 }
 
 .project-item {
@@ -27,24 +85,85 @@
     margin: 5px 0;
 }
 
-#project-details {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-#project-details img {
+#project-media {
     max-width: 100%;
     height: auto;
     margin-top: 10px;
 }
 
-#no-project {
-    text-align: center;
-    padding: 50px 0;
+.project-page {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-#project-details h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
+.project-header {
+    flex-direction: column;
+    align-self: center;
+    display: flex;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.project-image {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.project-info {
+    flex: 1;
+    align-self: center;
+    width: 400px;
+    font-size: 1em;
+    color: rgb(57, 56, 57);
+}
+
+.project-content {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.project-details {
+    flex: 2;
+    font-size: 1.1em;
+    width: 600px;
+    margin: 15px 0;
+}
+
+.project-backing {
+    flex: 1;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.funding-info {
+    margin-bottom: 20px;
+}
+
+.funding-info p {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.back-project-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-project-button:hover {
+    background-color: #218838;
 }

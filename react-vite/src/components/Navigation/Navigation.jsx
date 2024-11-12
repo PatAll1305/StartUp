@@ -12,7 +12,7 @@ function Navigation() {
   return (
     <ul>
       <li>
-        <NavLink to="/">Kickstarter</NavLink>
+        <NavLink to="/">StartUp</NavLink>
       </li>
       <li>
         <div className="relative smart-input-group">
@@ -27,18 +27,18 @@ function Navigation() {
       </li>
       <li className="right-side">
         <button
-            className="auth-button"
-            onClick={() => setShowLoginModal(true)}
-          >
-            Log In
-          </button>
-          {showLoginModal && (
-            <OpenModalMenuItem
-              itemText="Log In"
-              onItemClick={() => setShowLoginModal(false)}
-              modalComponent={<LoginFormModal />}
-            />
-          )}
+          className="auth-button"
+          onClick={() => setShowLoginModal(true)}
+        >
+          Log In
+        </button>
+        {showLoginModal && (
+          <OpenModalMenuItem
+            itemText="Log In"
+            onItemClick={() => setShowLoginModal(false)}
+            modalComponent={<LoginFormModal />}
+          />
+        )}
         <button
           className="auth-button"
           onClick={() => setShowSignupModal(true)}
