@@ -25,12 +25,13 @@ def seed_categories():
             category11, category12, category13, category14, category15
         ]
     )
-    db.session.commit
+    db.session.commit()
 
 
 def undo_categories():
     if environment == 'production':
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.categories RESTART IDENTITY CASCADE;")
+
     else:
         db.session.execute(text("DELETE FROM categories"))
 
