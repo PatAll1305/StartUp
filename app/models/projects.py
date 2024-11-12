@@ -22,6 +22,9 @@ class Project(db.Model):
 
     backed_projects = db.relationship('BackedProject', back_populates='project', cascade='all, delete')
 
+    backed_projects = db.relationship('BackedProject', back_populates='project', cascade="all, delete-orphan")
+
+
     def to_dict(self):
         return {
             "id": self.id,

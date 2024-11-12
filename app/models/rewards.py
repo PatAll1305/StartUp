@@ -12,7 +12,7 @@ class Reward(db.Model):
     name = db.Column(db.String(100))
     content = db.Column(db.Text)
 
-    backed_projects = db.relationship('BackedProject', back_populates='reward', cascade='all, delete')
+    backed_projects = db.relationship('BackedProject', back_populates='reward', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

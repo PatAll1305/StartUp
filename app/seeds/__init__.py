@@ -2,7 +2,7 @@ from flask.cli import AppGroup
 from ..models import environment
 from .users import seed_users, undo_users
 from .projects import seed_projects, undo_projects
-from .backedProjects import seed_backedProjects, undo_backedProjects
+from .backedProjects import seed_backed_projects, undo_backed_projects
 from .categories import seed_categories, undo_categories
 from .rewards import seed_rewards, undo_rewards
 
@@ -14,13 +14,13 @@ def seed():
     if environment == 'production':
         undo_rewards()
         undo_categories()
-        undo_backedProjects()
+        undo_backed_projects()
         undo_projects()
         undo_users()
 
     seed_users()
     seed_projects()
-    seed_backedProjects()
+    seed_backed_projects()
     seed_categories()
     seed_rewards()
 
@@ -29,6 +29,6 @@ def undo():
     """Undo all seeded data."""
     undo_rewards()
     undo_categories()
-    undo_backedProjects()
+    undo_backed_projects()
     undo_projects()
     undo_users()

@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
-import { Projects, ProjectsById } from '../components/Projects/index'
+import { Projects, ProjectsById, CreateProject } from '../components/Projects/index'
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -27,7 +27,12 @@ export const router = createBrowserRouter([
       {
         path: "/projects/:projectId",
         element: <ProjectsById />
-      }
+      },
+      {
+        path: "/projects/create",
+        element: <CreateProject />
+      },
+
     ],
   },
 ]);
