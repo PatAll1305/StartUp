@@ -21,6 +21,7 @@ class Project(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id', ondelete='SET NULL'))
 
     backed_projects = db.relationship('BackedProject', back_populates='project', cascade='all, delete')
+    rewards = db.relationship('Reward', back_populates='project', cascade='all, delete')
 
     def to_dict(self):
         return {
