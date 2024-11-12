@@ -1,4 +1,4 @@
-from models.db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA
 
 class Reward(db.Model):
     __tablename__ = 'rewards'
@@ -11,6 +11,8 @@ class Reward(db.Model):
     pledge = db.Column(db.Numeric(10, 2), nullable=False)
     name = db.Column(db.String(100))
     content = db.Column(db.Text)
+
+    backed_projects = db.relationship('BackedProject', back_populates='reward', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

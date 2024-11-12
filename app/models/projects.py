@@ -20,6 +20,9 @@ class Project(db.Model):
     backers = db.Column(db.Integer, nullable=False)
     category_id = db.Column(db.Integer, nullable=False)
 
+    backed_projects = db.relationship('BackedProject', back_populates='project', cascade="all, delete-orphan")
+
+
     def to_dict(self):
         return {
             "id": self.id,

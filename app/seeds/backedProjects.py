@@ -25,8 +25,8 @@ def seed_backed_projects():
     BackedProject(user_id=10, project_id=19, reward_id=None)
   ]
 
-  for backed_project in backed_projects:
-    db.session.add(backed_project)
+  for project in backed_projects:
+    db.session.add(project)
 
   db.session.commit()
 
