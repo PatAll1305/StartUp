@@ -1,8 +1,8 @@
 /* NavBar Styling */
 .navlist-login-page {
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
+  justify-content: center;
+  align-items: center;
   list-style-type: none;
   border-bottom: 3px solid #bff4c6;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
@@ -113,9 +113,9 @@ a {
 }
 
 .divider {
-  width: 100%; /* Makes the divider stretch the full width of its container */
-  max-width: 400px; /* Matches the width of the login form */
-  margin: 20px auto; /* Centers the divider */
+  width: 100%; 
+  max-width: 400px; 
+  margin: 20px auto; 
   border: 1px solid #bff4c6;
 }
 
