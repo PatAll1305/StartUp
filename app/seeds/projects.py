@@ -272,30 +272,32 @@ def seed_projects():
         try:
             for seed in seed_project_data:
                 project = Project(
-                    amount=seed["amount"],
                     user_id=seed["user_id"],
                     title=seed["title"],
                     description=seed["description"],
                     body=seed["body"],
                     goal=seed["goal"],
+                    amount=seed["amount"],
                     location=seed["location"],
                     media_url=seed["media_url"],
                     deadline=seed["deadline"],
                     backers=seed["backers"],
                     category_id=seed["category_id"]
                 )
-                print(project)
+                
                 db.session.add(project)
+            
             db.session.commit()
+            print("Projects seeded successfully.")
+        
         except Exception as e:
-            db.session.rollback()
-            print(f"Error during commit: {e}")
+            db.session.rollback()  
+            print(f"Error seeding projects: {e}")
 
 def undo_projects():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.projects RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM projects"))
 
     db.session.commit()
-

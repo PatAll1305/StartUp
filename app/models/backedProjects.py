@@ -14,18 +14,11 @@ class BackedProject(db.Model):
     nullable=False
   )
   project_id = db.Column(
-    db.Integer, 
-    db.ForeignKey(f'{SCHEMA}.projects.id' if environment == "production" else 'projects.id', ondelete='CASCADE'), 
-    nullable=False
+      db.Integer, 
+      db.ForeignKey(f'{SCHEMA}.projects.id' if environment == "production" else 'projects.id', ondelete='CASCADE'), 
+      nullable=False
   )
-  reward_id = db.Column(
-    db.Integer, 
-    db.ForeignKey(f'{SCHEMA}.rewards.id' if environment == "production" else 'rewards.id', ondelete='SET NULL')
-  )
-
-  user = db.relationship('User', back_populates='backed_projects')
-  project = db.relationship('Project', back_populates='backed_projects')
-  reward = db.relationship('Reward', back_populates='backed_projects')
+  reward_id = db.Column(db.Integer)
 
   def to_dict(self):
     return {
