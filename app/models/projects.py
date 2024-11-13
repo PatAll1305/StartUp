@@ -22,7 +22,6 @@ class Project(db.Model):
     location = db.Column(db.Text, nullable=False)
     media_url = db.Column(db.Text, nullable=False)
     deadline = db.Column(db.DateTime, default=datetime.now())
-    backers = db.Column(db.Integer, nullable=False)
     category_id = db.Column(
         db.Integer, 
         db.ForeignKey(f'{SCHEMA}.categories.id' if environment == "production" else 'categories.id'),
@@ -46,7 +45,6 @@ class Project(db.Model):
             "location": self.location,
             "media_url": self.media_url,
             "deadline": self.deadline.isoformat(),
-            "backers": self.backers,
             "category_id": self.category_id,
             "rewards": [reward.to_dict() for reward in self.rewards]
         }
