@@ -2,13 +2,18 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects } from '../../store/projects';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useModal } from '../../context/modal';
+import { DeleteProjectModal } from '../DeleteModals/index';
 import './Projects.css';
 
 export default function ProjectsById() {
     const { projectId } = useParams();
     const dispatch = useDispatch();
-    const project = useSelector(state => state.projects[projectId]);
     const navigate = useNavigate();
+    const { openModal } = useModal();
+
+    const project = useSelector(state => state.projects[projectId]);
+    const user = useSelector(state => state.session.user);
 
     useEffect(() => {
         dispatch(fetchProjects());
@@ -16,13 +21,15 @@ export default function ProjectsById() {
 
     if (!project) return <h1 className='loading'>Loading...</h1>;
 
+    const isOwner = user && user.id === project.user_id;
+
     return (
         <div className="project-page">
+            {/* TODO Add category tag after Categories are created */}
+            {/* <p className="project-category">Category: {project.category_id}</p> */}
             <div className="project-header">
                 <h1>{project.title}</h1>
                 <div className="project-info">
-                    {/* TODO Add category tag after Categories are created */}
-                    {/* <p className="project-category">Category: {project.category_id}</p> */}
                     <p>{project.description}</p>
                 </div>
             </div>
@@ -43,11 +50,20 @@ export default function ProjectsById() {
                     </div>
                 </div>
                 <button onClick={(e) => {
-                    e.preventDefault()
-                    navigate(`/projects/${projectId}/backing`)
-                }}
-                    className="back-project-button">Back this Project</button>
+                    e.preventDefault();
+                    navigate(`/projects/${projectId}/backing`);
+                }} className="back-project-button">
+                    Back this Project
+                </button>
+                {isOwner && (
+                    <button
+                        onClick={() => openModal(<DeleteProjectModal project={project} />)}
+                        className="delete-project-button"
+                    >
+                        Delete Project
+                    </button>
+                )}
             </div>
-        </div >
+        </div>
     );
 }

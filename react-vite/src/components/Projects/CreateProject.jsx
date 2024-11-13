@@ -23,7 +23,7 @@ export default function CreateProject() {
         description.length < 30 ? errors.description = "Description must contain at least 30 characters" : null
         goal < 1000 || goal > 100000 ? errors.goal = "Goal cannot be lower than $1000 USD or greater than $1 Million USD" : null
         !location.length ? errors.location = "location must be filled in" : null
-        !mediaUrl.includes('http') && !mediaUrl.includes('https') ? errors.mediaUrl = "Media URL must contain the 'http' or 'https' at the beginning of the URL" : null
+        !mediaUrl.includes('http://') && !mediaUrl.includes('https://') ? errors.mediaUrl = "Media URL must contain the 'http' or 'https' at the beginning of the URL" : null
         Date.parse(deadline) <= new Date ? errors.deadline = "Deadline cannot be before or on today's date" : null
 
         if (Object.keys(errors).length) {

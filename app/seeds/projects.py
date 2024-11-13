@@ -284,7 +284,6 @@ def seed_projects():
                     backers=seed["backers"],
                     category_id=seed["category_id"]
                 )
-                print(project)
                 db.session.add(project)
             db.session.commit()
         except Exception as e:

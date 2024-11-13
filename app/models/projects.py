@@ -1,5 +1,5 @@
 from datetime import datetime
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Project(db.Model):
     __tablename__ = 'projects'
@@ -9,7 +9,7 @@ class Project(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     amount = db.Column(db.Numeric(10, 2), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
     body = db.Column(db.Text, nullable=False)
@@ -18,12 +18,11 @@ class Project(db.Model):
     media_url = db.Column(db.Text, nullable=False)
     deadline = db.Column(db.DateTime, default=datetime.now())
     backers = db.Column(db.Integer, nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id', ondelete='SET NULL'))
+    category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id'), ondelete='SET NULL'))
 
-    backed_projects = db.relationship('BackedProject', back_populates='project', cascade='all, delete')
-
-    backed_projects = db.relationship('BackedProject', back_populates='project', cascade="all, delete-orphan")
-
+    backed_projects = db.relationship('BackedProject', back_populates='projects', cascade='all, delete')
+    rewards = db.relationship('Reward', back_populates='project', cascade='all, delete')
+    backed_projects = db.relationship('BackedProject', back_populates='projects', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
