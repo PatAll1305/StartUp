@@ -9,16 +9,12 @@ class Project(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     amount = db.Column(db.Numeric(10, 2), nullable=False)
-<<<<<<< HEAD
     user_id = db.Column(
         db.Integer, 
         db.ForeignKey(f'{SCHEMA}.users.id' if environment == "production" else 'users.id', 
         ondelete='CASCADE'), 
         nullable=False
     )
-=======
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
->>>>>>> 9c7de5e3042b8e5c53c2271b2b665d4f20333502
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
     body = db.Column(db.Text, nullable=False)
@@ -27,7 +23,6 @@ class Project(db.Model):
     media_url = db.Column(db.Text, nullable=False)
     deadline = db.Column(db.DateTime, default=datetime.now())
     backers = db.Column(db.Integer, nullable=False)
-<<<<<<< HEAD
     category_id = db.Column(
         db.Integer, 
         db.ForeignKey(f'{SCHEMA}.categories.id' if environment == "production" else 'categories.id'),
@@ -38,13 +33,6 @@ class Project(db.Model):
     backers = db.relationship('User', secondary='backed_projects', back_populates='backed_projects')
     category = db.relationship('Category', back_populates='projects')
     rewards = db.relationship('Reward', back_populates='project')
-=======
-    category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id'), ondelete='SET NULL'))
-
-    backed_projects = db.relationship('BackedProject', back_populates='projects', cascade='all, delete')
-    rewards = db.relationship('Reward', back_populates='project', cascade='all, delete')
-    backed_projects = db.relationship('BackedProject', back_populates='projects', cascade="all, delete-orphan")
->>>>>>> 9c7de5e3042b8e5c53c2271b2b665d4f20333502
 
     def to_dict(self):
         return {
