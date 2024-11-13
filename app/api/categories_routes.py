@@ -5,9 +5,9 @@ from .project_routes import Project
 categories_routes = Blueprint('category', __name__)
 
 @categories_routes.route('/', methods=['GET'])
-def getCategories():
+def get_categories():
     categories = Category.query.all()
-
+    return jsonify([category.to_dict() for category in categories])
 
 @categories_routes.route('/<int:category_id>/projects', methods=['GET'])
 def get_projects_by_category(category_id):
