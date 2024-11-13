@@ -1,8 +1,8 @@
-import { useModal } from '../../context/modal';
+import { useModal } from '../../context/Modal';
 import { useDispatch } from 'react-redux';
 import { deleteProject } from '../../store/projects';
 import { useNavigate } from 'react-router-dom';
-import './DeleteModals.css';
+import './DeleteModal.css';
 
 export default function DeleteProjectModal({ project }) {
     const { closeModal } = useModal();

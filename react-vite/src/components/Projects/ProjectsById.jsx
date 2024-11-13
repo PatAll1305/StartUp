@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects } from '../../store/projects';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useModal } from '../../context/modal';
+import { useModal } from '../../context/Modal.jsx';
 import { DeleteProjectModal } from '../DeleteModals/index';
 import './Projects.css';
 
