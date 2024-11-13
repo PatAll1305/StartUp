@@ -3,27 +3,27 @@ import { csrfFetch } from './csrf.js';
 const LOAD_PROJECTS = 'projects/LOAD';
 const ADD_PROJECT = 'projects/ADD';
 const REMOVE_PROJECT = 'projects/REMOVE';
+const UPDATE_PROJECT = 'projects/UPDATE';
 
-const loadProjects = (projects) => {
-    return {
-        type: LOAD_PROJECTS,
-        projects
-    };
-};
+const loadProjects = (projects) => ({
+    type: LOAD_PROJECTS,
+    projects
+});
 
-const addProject = (project) => {
-    return {
-        type: ADD_PROJECT,
-        project
-    };
-};
+const addProject = (project) => ({
+    type: ADD_PROJECT,
+    project
+});
 
-const removeProject = (projectId) => {
-    return {
-        type: REMOVE_PROJECT,
-        projectId
-    };
-};
+const removeProject = (projectId) => ({
+    type: REMOVE_PROJECT,
+    projectId
+});
+
+const updateProjectAction = (project) => ({
+    type: UPDATE_PROJECT,
+    project
+});
 
 export const fetchProjects = () => async (dispatch) => {
     const response = await csrfFetch('/api/projects');
@@ -36,22 +36,9 @@ export const fetchProjects = () => async (dispatch) => {
 };
 
 export const createProject = (payload) => async (dispatch) => {
-    const { title, description, goal, deadline, location, media_url, category_id, user_id, amount, backers } = payload;
-
     const response = await csrfFetch('/api/projects', {
         method: "POST",
-        body: JSON.stringify({
-            title,
-            description,
-            goal,
-            deadline,
-            location,
-            media_url,
-            category_id,
-            user_id,
-            amount,
-            backers
-        })
+        body: JSON.stringify(payload)
     });
 
     if (response.ok) {
@@ -69,6 +56,22 @@ export const deleteProject = (projectId) => async (dispatch) => {
     if (response.ok) {
         dispatch(removeProject(projectId));
         return projectId;
+    }
+};
+
+export const updateProject = (projectId, payload) => async (dispatch) => {
+    const response = await csrfFetch(`/api/projects/${projectId}`, {
+        method: "PUT",
+        body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+        const updatedProject = await response.json();
+        dispatch(updateProjectAction(updatedProject));
+        return updatedProject;
+    } else {
+        const errorData = await response.json();
+        throw errorData;
     }
 };
 
@@ -91,6 +94,12 @@ export default function projectReducer(state = {}, action) {
             const newState = { ...state };
             delete newState[action.projectId];
             return newState;
+        }
+        case UPDATE_PROJECT: {
+            return {
+                ...state,
+                [action.project.id]: action.project
+            };
         }
         default:
             return state;
