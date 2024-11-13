@@ -37,7 +37,7 @@ export const getRewardsThunk = () => async ( dispatch ) => {
     }
 }
 
-export const addProjectThunk = ( payload ) => async ( dispatch ) => {
+export const addRewardThunk = ( payload ) => async ( dispatch ) => {
     try {
         const { project_id, pledge, name, content } = payload
 
@@ -62,5 +62,30 @@ export const deleteRewardThunk = ( rewardId ) => async ( dispatch ) => {
         return rewardId
     } catch(error) {
         console.error('Failed to delete reward:', error)
+    }
+}
+
+export default function rewardReducer( state = {}, action ) {
+    switch (action.type) {
+        case GET_REWARDS: {
+            const newState = {}
+            action.rewards.forEach((reward) => {
+                newState[reward.id] = reward
+            })
+            return newState
+        }
+        case ADD_REWARDS: {
+            return {
+                ...state,
+                [action.reward.id]: action.reward
+            }
+        }
+        case DELETE_REWARDS: {
+            const newState = {...state}
+            delete newState[action.rewardId]
+            return newState
+        }
+        default:
+            return state;
     }
 }
