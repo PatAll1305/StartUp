@@ -10,15 +10,15 @@ export default function DeleteProjectModal({ project }) {
     const navigate = useNavigate();
 
     const acceptDelete = async (e) => {
-        e.preventDefault();
+        await e.preventDefault();
         await dispatch(deleteProject(project.id));
-        closeModal();
-        navigate(`/projects`);
+        await closeModal();
+        await navigate(`/projects`);
     };
 
-    const declineDelete = (e) => {
-        e.preventDefault();
-        closeModal();
+    const declineDelete = async (e) => {
+        await e.preventDefault();
+        await closeModal();
     };
 
     return (
