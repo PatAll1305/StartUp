@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, NavLink } from "react-router-dom";
 import { thunkSignup } from "../../store/session";
+import "./SignupForm.css";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -42,6 +43,18 @@ function SignupFormPage() {
 
   return (
     <>
+      <ul className="navlist-signup-page">
+        <li className="signup-startup-title">
+          <NavLink to="/">StartUp</NavLink>
+        </li>
+      </ul>
+      <div className="already-account-section">
+        <p className="already-account-text">
+          Already have an account?{" "}
+          <NavLink to="/login" className="login-link">Log In</NavLink>
+        </p>
+        <hr className="divider" />
+      </div>
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
