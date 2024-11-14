@@ -15,5 +15,4 @@ class Category(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'projects': [project.to_dict() for project in self.projects]
         }
