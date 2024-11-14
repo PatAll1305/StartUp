@@ -1,23 +1,25 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
-import { Projects, ProjectsById, CreateProject, UpdateProject } from '../components/Projects/index'
-import Layout from './Layout';
-
+import { Projects, ProjectsById, CreateProject, UpdateProject, ProjectsByCategory } from '../components/Projects/index'
+// import Layout from './Layout';
+import HomePage from '../components/HomePage/Homepage';
+import AuthLayout from './AuthLayout'
 export const router = createBrowserRouter([
   {
-    element: <Layout />,
+    path: "/",
+    element: <AuthLayout />, // Layout without reg navbar
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <HomePage />,
       },
       {
         path: "login",
         element: <LoginFormPage />,
       },
       {
-        path: "signup",
+        path: "/signup",
         element: <SignupFormPage />,
       },
       {
@@ -35,7 +37,11 @@ export const router = createBrowserRouter([
       {
         path: '/projects/:projectId/update',
         element: <UpdateProject />
-      }
+      },
+      {
+        path: '/categories/:categoryId/projects',
+        element: <ProjectsByCategory />
+      },
 
     ],
   },

@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from models import db, Reward
-from project_routes import check_project_ownership
+from ..models import db, Reward
+from .project_routes import check_project_ownership
 
 reward_routes = Blueprint('reward', __name__)
 

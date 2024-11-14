@@ -5,6 +5,7 @@ import { createProject } from '../../store/projects';
 import './Projects.css';
 
 export default function CreateProject() {
+    document.title = "Create a Project"
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(state => state.session.user);

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from app.models import db, BackedProject, Project, Reward
-from app.forms import BackedProjectForm, UpdateBackedProjectForm
+from app.forms import BackProjectForm, UpdateBackedProjectForm
 
 backed_project_routes = Blueprint('backed_projects', __name__)
 
@@ -13,7 +13,7 @@ def error_response(message, status_code=400):
 @login_required
 def back_project():
   try:
-    form = BackedProjectForm()
+    form = BackProjectForm()
     if form.validate_on_submit():
       reward_id = form.data['reward_id']
       project_id = form.data['project_id']

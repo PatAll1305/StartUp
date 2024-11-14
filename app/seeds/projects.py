@@ -15,7 +15,6 @@ seed_project_data = [
         "location": "New York, NY",
         "media_url": "https://example.com/media/alpha.jpg",
         "deadline": datetime.now() + timedelta(days=30),
-        "backers": 50,
         "category_id": 1
     },
     {
@@ -28,7 +27,6 @@ seed_project_data = [
         "location": "San Francisco, CA",
         "media_url": "https://example.com/media/beta.jpg",
         "deadline": datetime.now() + timedelta(days=15),
-        "backers": 30,
         "category_id": 2
     },
     {
@@ -41,7 +39,6 @@ seed_project_data = [
         "location": "Chicago, IL",
         "media_url": "https://example.com/media/data-analysis.jpg",
         "deadline": datetime.now() + timedelta(days=45),
-        "backers": 70,
         "category_id": 3
     },
     {
@@ -54,7 +51,6 @@ seed_project_data = [
         "location": "Austin, TX",
         "media_url": "https://example.com/media/ecommerce.jpg",
         "deadline": datetime.now() + timedelta(days=60),
-        "backers": 45,
         "category_id": 4
     },
     {
@@ -67,7 +63,6 @@ seed_project_data = [
         "location": "Boston, MA",
         "media_url": "https://example.com/media/ml-pipeline.jpg",
         "deadline": datetime.now() + timedelta(days=90),
-        "backers": 80,
         "category_id": 3
     },
     {
@@ -80,7 +75,6 @@ seed_project_data = [
         "location": "Los Angeles, CA",
         "media_url": "https://example.com/media/mobile-app.jpg",
         "deadline": datetime.now() + timedelta(days=50),
-        "backers": 60,
         "category_id": 5
     },
     {
@@ -93,7 +87,6 @@ seed_project_data = [
         "location": "Miami, FL",
         "media_url": "https://example.com/media/feedback.jpg",
         "deadline": datetime.now() + timedelta(days=25),
-        "backers": 35,
         "category_id": 6
     },
     {
@@ -106,7 +99,6 @@ seed_project_data = [
         "location": "Seattle, WA",
         "media_url": "https://example.com/media/game-dev.jpg",
         "deadline": datetime.now() + timedelta(days=120),
-        "backers": 110,
         "category_id": 7
     },
     {
@@ -119,7 +111,6 @@ seed_project_data = [
         "location": "Philadelphia, PA",
         "media_url": "https://example.com/media/chat-app.jpg",
         "deadline": datetime.now() + timedelta(days=40),
-        "backers": 90,
         "category_id": 2
     },
     {
@@ -132,7 +123,6 @@ seed_project_data = [
         "location": "Denver, CO",
         "media_url": "https://example.com/media/ai-chatbot.jpg",
         "deadline": datetime.now() + timedelta(days=20),
-        "backers": 40,
         "category_id": 8
     },
     {
@@ -145,7 +135,6 @@ seed_project_data = [
         "location": "Las Vegas, NV",
         "media_url": "https://example.com/media/social-media.jpg",
         "deadline": datetime.now() + timedelta(days=35),
-        "backers": 55,
         "category_id": 5
     },
     {
@@ -158,7 +147,6 @@ seed_project_data = [
         "location": "Houston, TX",
         "media_url": "https://example.com/media/inventory.jpg",
         "deadline": datetime.now() + timedelta(days=75),
-        "backers": 65,
         "category_id": 4
     },
     {
@@ -171,7 +159,6 @@ seed_project_data = [
         "location": "Chicago, IL",
         "media_url": "https://example.com/media/backup.jpg",
         "deadline": datetime.now() + timedelta(days=45),
-        "backers": 32,
         "category_id": 6
     },
     {
@@ -184,7 +171,6 @@ seed_project_data = [
         "location": "Portland, OR",
         "media_url": "https://example.com/media/weather.jpg",
         "deadline": datetime.now() + timedelta(days=110),
-        "backers": 95,
         "category_id": 7
     },
     {
@@ -197,7 +183,6 @@ seed_project_data = [
         "location": "Phoenix, AZ",
         "media_url": "https://example.com/media/expense.jpg",
         "deadline": datetime.now() + timedelta(days=30),
-        "backers": 20,
         "category_id": 3
     },
     {
@@ -210,7 +195,6 @@ seed_project_data = [
         "location": "Baltimore, MD",
         "media_url": "https://example.com/media/hr.jpg",
         "deadline": datetime.now() + timedelta(days=80),
-        "backers": 72,
         "category_id": 2
     },
     {
@@ -223,7 +207,6 @@ seed_project_data = [
         "location": "San Diego, CA",
         "media_url": "https://example.com/media/streaming.jpg",
         "deadline": datetime.now() + timedelta(days=90),
-        "backers": 110,
         "category_id": 5
     },
     {
@@ -236,7 +219,6 @@ seed_project_data = [
         "location": "Dallas, TX",
         "media_url": "https://example.com/media/smart-home.jpg",
         "deadline": datetime.now() + timedelta(days=65),
-        "backers": 83,
         "category_id": 6
     },
     {
@@ -249,7 +231,6 @@ seed_project_data = [
         "location": "Newark, NJ",
         "media_url": "https://example.com/media/photo-editing.jpg",
         "deadline": datetime.now() + timedelta(days=100),
-        "backers": 68,
         "category_id": 4
     },
     {
@@ -262,39 +243,31 @@ seed_project_data = [
         "location": "Atlanta, GA",
         "media_url": "https://example.com/media/fitness.jpg",
         "deadline": datetime.now() + timedelta(days=50),
-        "backers": 60,
         "category_id": 7
     }
 ]
 
 def seed_projects():
-    with current_app.app_context():
-        try:
-            for seed in seed_project_data:
-                project = Project(
-                    amount=seed["amount"],
-                    user_id=seed["user_id"],
-                    title=seed["title"],
-                    description=seed["description"],
-                    body=seed["body"],
-                    goal=seed["goal"],
-                    location=seed["location"],
-                    media_url=seed["media_url"],
-                    deadline=seed["deadline"],
-                    backers=seed["backers"],
-                    category_id=seed["category_id"]
-                )
-                db.session.add(project)
-            db.session.commit()
-        except Exception as e:
-            db.session.rollback()
-            print(f"Error during commit: {e}")
-
+    for seed in seed_project_data:
+        project = Project(
+            user_id=seed["user_id"],
+            title=seed["title"],
+            description=seed["description"],
+            body=seed["body"],
+            goal=seed["goal"],
+            amount=seed["amount"],
+            location=seed["location"],
+            media_url=seed["media_url"],
+            deadline=seed["deadline"],
+            category_id=seed["category_id"]
+        )
+        db.session.add(project)
+    db.session.commit()
+        
 def undo_projects():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.projects RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM projects"))
 
     db.session.commit()
-
