@@ -16,7 +16,7 @@ button:hover {
 .rewards-content {
     justify-items: center;
     justify-self: center;
-    border: lightgreen solid 3px;
+    border: darkgreen solid 3px;
     width: 50%;
     margin: 20px;
     padding: 20px;
