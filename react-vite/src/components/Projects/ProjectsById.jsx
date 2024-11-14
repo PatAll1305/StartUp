@@ -1,22 +1,21 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProjects } from '../../store/projects';
+import { fetchOneProject } from '../../store/projects';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useModal } from '../../context/Modal.jsx';
 import { DeleteProjectModal } from '../DeleteModals/index';
+import OpenModalButton from '../OpenModalButton/OpenModalButton.jsx';
 import './Projects.css';
 
 export default function ProjectsById() {
     const { projectId } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { openModal } = useModal();
 
-    const project = useSelector(state => state.projects[projectId]);
+    const project = useSelector(state => state.projects[+projectId]);
     const user = useSelector(state => state.session.user);
 
     useEffect(() => {
-        dispatch(fetchProjects());
+        dispatch(fetchOneProject(+projectId));
     }, [dispatch, projectId]);
 
     if (!project) return <h1 className='loading'>Loading...</h1>;
@@ -38,7 +37,7 @@ export default function ProjectsById() {
                 <div className="project-details">
                     <p>Location: {project.location}</p>
                     <p>About the Project: {project.body}</p>
-                    <p>Backers: {project.backers}</p>
+                    <p>Backers: {/*TODO get backed_projects and add count for all with this project id */}</p>
                     <p>Deadline: {new Date(project.deadline).toLocaleDateString()}</p>
                 </div>
             </div>
@@ -49,20 +48,23 @@ export default function ProjectsById() {
                         <p> Raised towards the ${parseFloat(project.goal).toFixed(2)} goal</p>
                     </div>
                 </div>
-                <button onClick={(e) => {
-                    e.preventDefault();
-                    navigate(`/projects/${projectId}/backing`);
-                }} className="back-project-button">
-                    Back this Project
-                </button>
-                {isOwner && (
-                    <button
-                        onClick={() => openModal(<DeleteProjectModal project={project} />)}
-                        className="delete-project-button"
-                    >
-                        Delete Project
-                    </button>
-                )}
+                {isOwner ? (
+                    <div className='manipulation-buttons'>
+                        <OpenModalButton
+                            buttonText="Delete Project"
+                            modalComponent={<DeleteProjectModal project={project} />}
+                            className='delete-project'
+                        />
+                        <button className='update-project' onClick={() => { navigate(`/projects/${projectId}/update`) }}> Update Project</button>
+                    </div>
+                )
+                    :
+                    (<button onClick={(e) => {
+                        e.preventDefault();
+                        navigate(`/projects/${projectId}/rewards`);
+                    }} className="back-project-button">
+                        Back this Project
+                    </button>)}
             </div>
         </div>
     );
