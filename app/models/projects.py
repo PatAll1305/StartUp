@@ -8,7 +8,7 @@ class Project(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    amount = db.Column(db.Numeric(10, 2), nullable=False)
+    amount = db.Column(db.Numeric(10, 2), default=0)
     user_id = db.Column(
         db.Integer, 
         db.ForeignKey(f'{SCHEMA}.users.id' if environment == "production" else 'users.id', 
@@ -31,7 +31,7 @@ class Project(db.Model):
     user = db.relationship('User', back_populates='projects')
     backers = db.relationship('User', secondary='backed_projects', back_populates='backed_projects')
     category = db.relationship('Category', back_populates='projects')
-    rewards = db.relationship('Reward', back_populates='project')
+    rewards = db.relationship('Reward', back_populates='project', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

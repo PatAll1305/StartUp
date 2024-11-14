@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProjects } from '../../store/projects';
+import { fetchOneProject } from '../../store/projects';
 import { useParams, useNavigate } from 'react-router-dom';
 import { DeleteProjectModal } from '../DeleteModals/index';
 import OpenModalButton from '../OpenModalButton/OpenModalButton.jsx';
@@ -11,11 +11,11 @@ export default function ProjectsById() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const project = useSelector(state => state.projects[projectId]);
+    const project = useSelector(state => state.projects[+projectId]);
     const user = useSelector(state => state.session.user);
 
     useEffect(() => {
-        dispatch(fetchProjects());
+        dispatch(fetchOneProject(+projectId));
     }, [dispatch, projectId]);
 
     if (!project) return <h1 className='loading'>Loading...</h1>;
@@ -60,7 +60,7 @@ export default function ProjectsById() {
                             buttonText="Delete Project"
                             modalComponent={<DeleteProjectModal project={project} />}
                         />
-                        <button id='update-project'> Update Project</button>
+                        <button id='update-project' onClick={() => { navigate(`/projects/${projectId}/update`) }}> Update Project</button>
                     </>
                 )}
             </div>
