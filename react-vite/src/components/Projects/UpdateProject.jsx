@@ -47,7 +47,7 @@ export default function UpdateProject() {
         };
 
         try {
-            await dispatch(updateProject(projectId, updatedProject));
+            await dispatch(updateProject(projectId, updatedProject, user.id));
             navigate(`/projects/${projectId}`);
         } catch (err) {
             const error = await err.json();

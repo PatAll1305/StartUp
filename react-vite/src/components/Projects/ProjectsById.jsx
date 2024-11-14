@@ -2,15 +2,14 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects } from '../../store/projects';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useModal } from '../../context/Modal.jsx';
 import { DeleteProjectModal } from '../DeleteModals/index';
+import OpenModalButton from '../OpenModalButton/OpenModalButton.jsx';
 import './Projects.css';
 
 export default function ProjectsById() {
     const { projectId } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { openModal } = useModal();
 
     const project = useSelector(state => state.projects[projectId]);
     const user = useSelector(state => state.session.user);
@@ -38,7 +37,7 @@ export default function ProjectsById() {
                 <div className="project-details">
                     <p>Location: {project.location}</p>
                     <p>About the Project: {project.body}</p>
-                    <p>Backers: {project.backers}</p>
+                    <p>Backers: {/*TODO get backed_projects and add count for all with this project id */}</p>
                     <p>Deadline: {new Date(project.deadline).toLocaleDateString()}</p>
                 </div>
             </div>
@@ -56,12 +55,13 @@ export default function ProjectsById() {
                     Back this Project
                 </button>
                 {isOwner && (
-                    <button
-                        onClick={() => openModal(<DeleteProjectModal project={project} />)}
-                        className="delete-project-button"
-                    >
-                        Delete Project
-                    </button>
+                    <>
+                        <OpenModalButton
+                            buttonText="Delete Project"
+                            modalComponent={<DeleteProjectModal project={project} />}
+                        />
+                        <button id='update-project'> Update Project</button>
+                    </>
                 )}
             </div>
         </div>
