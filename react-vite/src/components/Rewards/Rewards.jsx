@@ -17,11 +17,11 @@ const Rewards = () => {
     }, [dispatch])
 
     return (
-        <div className="rewards">
+        <div className="each-reward">
             {rewards.length > 0 ? (
                 rewards.map((reward) => (
-                <div key={reward.id}>
-                    <p>{reward.content}</p>
+                <div className="rewards-content" key={reward.id}>
+                    <h4 className="rewards-desc">{reward.content}</h4>
                     <button>Pledge: ${reward.pledge}</button>
                 </div>
             ))
