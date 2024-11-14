@@ -20,9 +20,9 @@ def seed():
         undo_backed_projects()
         undo_rewards()
     seed_users()
+    seed_categories()
     seed_projects()
     seed_backed_projects()
-    seed_categories()
     seed_rewards()
 
 
