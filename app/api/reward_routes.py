@@ -4,6 +4,11 @@ from .project_routes import check_project_ownership
 
 reward_routes = Blueprint('reward', __name__)
 
+@reward_routes.route('/', methods=['GET'])
+def get_rewards():
+    rewards = Reward.query.all()
+    return jsonify([reward.to_dict() for reward in rewards])
+
 @reward_routes.route('/', methods=['POST'])
 @check_project_ownership
 def create_reward():
