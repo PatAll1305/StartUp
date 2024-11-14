@@ -48,21 +48,25 @@ export const createProject = (payload) => async (dispatch) => {
     }
 };
 
-export const deleteProject = (projectId) => async (dispatch) => {
+export const deleteProject = (projectId, userId) => async (dispatch) => {
     const response = await csrfFetch(`/api/projects/${projectId}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: { "userId": userId }
     });
 
     if (response.ok) {
         dispatch(removeProject(projectId));
         return projectId;
+    } else {
+        console.log(response)
     }
 };
 
-export const updateProject = (projectId, payload) => async (dispatch) => {
+export const updateProject = (projectId, payload, userId) => async (dispatch) => {
     const response = await csrfFetch(`/api/projects/${projectId}`, {
         method: "PUT",
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        headers: { "userId": userId }
     });
 
     if (response.ok) {
