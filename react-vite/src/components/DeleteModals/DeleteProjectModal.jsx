@@ -1,5 +1,5 @@
 import { useModal } from '../../context/Modal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteProject } from '../../store/projects';
 import { useNavigate } from 'react-router-dom';
 import './DeleteModal.css';
@@ -8,17 +8,18 @@ export default function DeleteProjectModal({ project }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector(state => state.session.user)
 
     const acceptDelete = async (e) => {
-        await e.preventDefault();
-        await dispatch(deleteProject(project.id));
-        await closeModal();
-        await navigate(`/projects`);
+        e.preventDefault();
+        dispatch(deleteProject(project.id, user.id));
+        closeModal();
+        navigate(`/projects`);
     };
 
     const declineDelete = async (e) => {
-        await e.preventDefault();
-        await closeModal();
+        e.preventDefault();
+        closeModal();
     };
 
     return (
