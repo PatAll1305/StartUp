@@ -17,6 +17,7 @@ class Reward(db.Model):
     content = db.Column(db.Text)
 
     project = db.relationship('Project', back_populates='rewards')
+    backed_projects = db.relationship('BackedProject', back_populates='reward')
 
     def to_dict(self):
         return {
