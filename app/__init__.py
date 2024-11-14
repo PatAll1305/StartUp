@@ -8,24 +8,13 @@ from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.project_routes import project_routes
+from .api.categories_routes import categories_routes
+from .api.reward_routes import reward_routes
+from .api.backed_projects_routes import backed_project_routes
 from .seeds import seed_commands
 from .config import Config
 
-def create_app():
-    app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
-    app.config.from_object(Config)
-
-    db.init_app(app)
-
-    with app.app_context():
-        db.create_all()
-
-    return app
-
-app = create_app()
-
-SQLALCHEMY_DATABASE_URI = os.environ.get(
-        'DATABASE_URL')
+app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
 # Setup login manager
 login = LoginManager(app)
@@ -39,19 +28,26 @@ def load_user(id):
 
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
+
 app.config.from_object(Config)
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(project_routes, url_prefix='/api/projects')
+app.register_blueprint(categories_routes, url_prefix='/api/categories')
+app.register_blueprint(reward_routes, url_prefix='/api/rewards')
+app.register_blueprint(backed_project_routes, url_prefix='/api/backed_projects')
 db.init_app(app)
 Migrate(app, db)
 
 # Application Security
 CORS(app)
 
-print(os.environ.get('DATABASE_URL'))
 
+# Since we are deploying with Docker and Flask,
+# we won't be using a buildpack when we deploy to Heroku.
+# Therefore, we need to make sure that in production any
+# request made over http is redirected to https.
+# Well.........
 @app.before_request
 def https_redirect():
     if os.environ.get('FLASK_ENV') == 'production':
@@ -94,8 +90,7 @@ def react_root(path):
     or index.html requests
     """
     if path == 'favicon.ico':
-        response = app.send_from_directory('public', 'favicon.ico')
-        return inject_csrf_token(response)
+        return app.send_from_directory('public', 'favicon.ico')
     return app.send_static_file('index.html')
 
 

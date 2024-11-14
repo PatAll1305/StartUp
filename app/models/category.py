@@ -9,8 +9,11 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(30), nullable=False)
 
+    projects = db.relationship('Project', back_populates='category', cascade="all, delete-orphan")
+
     def to_dict(self):
         return {
             'id': self.id,
-            'title': self.title
+            'title': self.title,
+            'projects': [project.to_dict() for project in self.projects]
         }
