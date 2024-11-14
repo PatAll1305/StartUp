@@ -225,3 +225,42 @@
 .title-error {
     border: 2px red
 }
+
+
+.manipulation-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    .delete-project {
+        padding: 10px 20px;
+        margin-top: 10px;
+        cursor: pointer;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: red;
+    }
+
+    .update-project {
+        padding: 10px 20px;
+        margin-top: 10px;
+        cursor: pointer;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: rgb(0, 43, 92);
+    }
+}
+
+.update-project:hover {
+    background-color: rgb(0, 90, 194);
+    transition: background-color 0.3s ease;
+}
+
+.delete-project:hover {
+    background-color: rgb(123, 0, 0);
+    transition: background-color 0.3s ease;
+}
