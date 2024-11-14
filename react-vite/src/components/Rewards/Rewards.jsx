@@ -10,8 +10,7 @@ const Rewards = () => {
     const dispatch = useDispatch();
     const rewards = useSelector((state) =>
         Object.values(state.rewards).filter((reward) => reward.project_id === Number(projectId)))
-    console.log(projectId)
-
+    
     useEffect(() => {
         dispatch(getRewardsThunk())
     }, [dispatch])

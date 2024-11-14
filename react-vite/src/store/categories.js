@@ -9,7 +9,7 @@ const getCategories = ( categories ) => ({
 
 export const getCategoriesThunk = () => async ( dispatch ) => {
     const res = await csrfFetch('/api/categories')
-    if(res.ok) {
+    if(!res.ok) {
         throw new Error('Network not responding')
     }
 
