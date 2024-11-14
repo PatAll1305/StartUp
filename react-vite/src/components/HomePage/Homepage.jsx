@@ -34,7 +34,7 @@ export default function HomePage() {
                                 </div>))}
                         </div>
                     ) : (
-                        <button onClick={() => navigate('/projects/create')}>
+                        <button className='homepage-buttons' onClick={() => navigate('/projects/create')}>
                             Create Your First Project!
                         </button>
                     )}

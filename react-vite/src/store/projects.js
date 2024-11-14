@@ -4,6 +4,13 @@ const LOAD_PROJECTS = 'projects/LOAD';
 const ADD_PROJECT = 'projects/ADD';
 const REMOVE_PROJECT = 'projects/REMOVE';
 const UPDATE_PROJECT = 'projects/UPDATE';
+const FETCH_ONE_PROJECT = 'projects/FETCH_ONE';
+
+const fetchOneProjectAction = (project) => ({
+    type: FETCH_ONE_PROJECT,
+    project
+});
+
 
 const loadProjects = (projects) => ({
     type: LOAD_PROJECTS,
@@ -24,6 +31,19 @@ const updateProjectAction = (project) => ({
     type: UPDATE_PROJECT,
     project
 });
+
+export const fetchOneProject = (projectId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/projects/${projectId}`);
+
+    if (response.ok) {
+        const project = await response.json();
+        dispatch(fetchOneProjectAction(project));
+        return project;
+    } else {
+        const errorData = await response.json();
+        throw errorData;
+    }
+};
 
 export const fetchProjects = () => async (dispatch) => {
     const response = await csrfFetch('/api/projects');
@@ -57,8 +77,6 @@ export const deleteProject = (projectId, userId) => async (dispatch) => {
     if (response.ok) {
         dispatch(removeProject(projectId));
         return projectId;
-    } else {
-        console.log(response)
     }
 };
 
@@ -105,7 +123,14 @@ export default function projectReducer(state = {}, action) {
                 [action.project.id]: action.project
             };
         }
+        case FETCH_ONE_PROJECT: {
+            return {
+                ...state,
+                [action.project.id]: action.project
+            };
+        }
         default:
             return state;
     }
 }
+
