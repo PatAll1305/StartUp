@@ -15,9 +15,9 @@ def seed():
     if environment == 'production':
         # Make sure to add all your other model's undo functions below
         undo_users()
+        undo_categories()
         undo_projects()
         undo_backed_projects()
-        undo_categories()
         undo_rewards()
     seed_users()
     seed_projects()
