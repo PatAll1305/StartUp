@@ -17,13 +17,13 @@ def seed():
         undo_users()
         undo_categories()
         undo_projects()
-        undo_backed_projects()
         undo_rewards()
+        undo_backed_projects()
     seed_users()
     seed_categories()
     seed_projects()
-    seed_backed_projects()
     seed_rewards()
+    seed_backed_projects()
 
 
 # Creates the `flask seed undo` command
