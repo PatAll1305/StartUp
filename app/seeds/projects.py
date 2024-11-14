@@ -1,7 +1,5 @@
-from flask import current_app
 from sqlalchemy.sql import text
 from app.models import db, Project, environment, SCHEMA
-from datetime import datetime, timedelta
 from datetime import datetime, timedelta
 
 seed_project_data = [
@@ -263,7 +261,7 @@ def seed_projects():
         )
         db.session.add(project)
     db.session.commit()
-        
+
 def undo_projects():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.projects RESTART IDENTITY CASCADE;")

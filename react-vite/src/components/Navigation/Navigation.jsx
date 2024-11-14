@@ -1,11 +1,14 @@
 // import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 // import OpenModalMenuItem from "./OpenModalMenuItem";
 // import LoginFormModal from "../LoginFormModal";
 // import SignupFormModal from "../SignupFormModal";
+import ProfileButton from './ProfileButton';
 import "./Navigation.css";
 
 function Navigation() {
+  const sessionUser = useSelector(state => state.session.user);
   // const [showLoginModal, setShowLoginModal] = useState(false);
   // const [showSignupModal, setShowSignupModal] = useState(false);
 
@@ -27,29 +30,40 @@ function Navigation() {
       </li>
       <li>
         <div className="search-bar">
-          <button type="submit" className="search-button">
-            <i className="fas fa-search"></i>
-          </button>
           <input
             placeholder="Search projects, creators, and categories"
             type="text"
             value=""
           />
+          <i className="fas fa-search search-icon"></i>
         </div>
       </li>
       <li className="right-side">
-        <button
-          className="auth-button"
-          onClick={handleStartProjectClick}
-        >
-          Start a Project
-        </button>
-        <button
-          className="auth-button"
-          onClick={handleLoginClick}
-        >
-          Log In
-        </button>
+        {sessionUser ? (
+          <>
+            <button
+              className="auth-button"
+              onClick={handleStartProjectClick}>
+              Start a Project
+            </button>
+            <ProfileButton user={sessionUser} />
+          </>
+        ) : (
+          <>
+            <button
+              className="auth-button"
+              onClick={handleStartProjectClick}
+            >
+              Start a Project
+            </button>
+            <button
+              className="auth-button"
+              onClick={handleLoginClick}
+            >
+              Log In
+            </button>
+          </>
+        )}
       </li>
     </ul>
   );
