@@ -4,12 +4,10 @@ const GET_REWARDS = 'rewards/GET'
 const ADD_REWARDS = 'rewards/ADD'
 const DELETE_REWARDS = 'rewards/DELETE'
 
-const getRewards = ( rewards ) => {
-    return {
-        type: GET_REWARDS,
-        rewards
-    }
-}
+const getRewards = ( rewards ) => ({
+    type: GET_REWARDS,
+    rewards
+})
 
 const addReward = ( reward ) => {
     return {
@@ -27,7 +25,10 @@ const deleteReward = ( rewardId ) => {
 
 export const getRewardsThunk = () => async ( dispatch ) => {
     try {
-        const res = await csrfFetch('/api/rewards')
+        const res = await fetch('/api/rewards')
+        if(!res.ok) {
+            throw new Error('network not responding')
+        }
 
         const rewards = await res.json()
         dispatch(getRewards(rewards))
