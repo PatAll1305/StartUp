@@ -15,7 +15,7 @@ class BackedProject(db.Model):
   user = db.relationship('User', back_populates='backed_projects')
   project = db.relationship('Project', back_populates='backed_projects')
   reward = db.relationship('Reward', back_populates='backed_projects')
-  backed_projects = db.relationship('BackedProject', back_populates='reward')
+  
 
   def to_dict(self):
     return {
