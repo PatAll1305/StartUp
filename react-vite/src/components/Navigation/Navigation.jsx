@@ -19,8 +19,12 @@ function Navigation() {
   };
 
   const handleStartProjectClick = () => {
-    alert("This feature is coming soon!");
-    // navigate("/StartProject"); 
+    // alert("This feature is coming soon!");
+    if (sessionUser) {
+      navigate("/projects/create"); 
+    } else {
+      navigate("/login"); 
+    }
   };
 
   return (
