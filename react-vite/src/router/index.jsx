@@ -2,14 +2,18 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import { Projects, ProjectsById, CreateProject, UpdateProject, ProjectsByCategory } from '../components/Projects/index'
-// import Layout from './Layout';
+import Layout from './Layout';
 import HomePage from '../components/HomePage/Homepage';
 import AuthLayout from './AuthLayout'
+import Rewards from '../components/Rewards/Rewards';
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <AuthLayout />, // Layout without reg navbar
+    element: <Layout />, // Layout without reg navbar
     children: [
+      {
+        element: <AuthLayout />, // Layout without reg navbar
+        children: [
       {
         path: "/",
         element: <HomePage />,
@@ -42,7 +46,14 @@ export const router = createBrowserRouter([
         path: '/categories/:categoryId/projects',
         element: <ProjectsByCategory />
       },
+      {
+        path: '/projects/:projectId/rewards',
+        element: <Rewards />
+      }
+
 
     ],
   },
+]
+},
 ]);
