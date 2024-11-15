@@ -2,14 +2,14 @@ import { csrfFetch } from "./csrf";
 
 const GET_CATEGORIES = 'categories/GET'
 
-const getCategories = ( categories ) => ({
+const getCategories = (categories) => ({
     type: GET_CATEGORIES,
     categories
 })
 
-export const getCategoriesThunk = () => async ( dispatch ) => {
+export const getCategoriesThunk = () => async (dispatch) => {
     const res = await csrfFetch('/api/categories')
-    if(!res.ok) {
+    if (!res.ok) {
         throw new Error('Network not responding')
     }
 
@@ -19,10 +19,10 @@ export const getCategoriesThunk = () => async ( dispatch ) => {
 }
 
 export default function categoryReducer(state = {}, action) {
-    switch(action.type) {
+    switch (action.type) {
         case GET_CATEGORIES: {
             const newState = {}
-            action.categories.forEach(( category ) => {
+            action.categories.forEach((category) => {
                 newState[category.id] = category
             })
             return newState

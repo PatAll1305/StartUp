@@ -35,7 +35,10 @@ def create_project():
         description=data['description'],
         goal=data['goal'],
         deadline=datetime.fromisoformat(data['deadline']),
-        category_id=data['category_id']
+        category_id=data['category_id'],
+        body=data["body"],
+        location=data["location"],
+        media_url=data["media_url"]
     )
     db.session.add(new_project)
     db.session.commit()
