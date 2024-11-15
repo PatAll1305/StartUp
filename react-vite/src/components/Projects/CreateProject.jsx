@@ -29,7 +29,7 @@ export default function CreateProject() {
         description.length > 50 || description.length < 10 ? errors.description = "Description must be between 10 and 50 characters" : null
         about.length < 50 || about.length > 1000 ? errors.about = "There should be more details in 'Tell us more' (50 -1000 characters)" : null
         goal < 1000 || goal > 100000 ? errors.goal = "Goal cannot be lower than $1000 USD or greater than $1 Million USD" : null
-        !location.length ? errors.location = "Location must be filled in" : null
+        !location.length || location.split(',').length !== 2 || location.split(',')[1].length !== 2 ? errors.location = "Location should be in 'City, State' format" : null
         !mediaUrl.includes('http://') && !mediaUrl.includes('https://') ? errors.mediaUrl = "Media URL must contain the 'http://' or 'https://' at the beginning of the URL" : null
         Date.parse(deadline) <= new Date ? errors.deadline = "Deadline cannot be before or on today's date" : null
 
@@ -38,7 +38,7 @@ export default function CreateProject() {
         } else {
             setErrors({})
         }
-    }, [title.length, description.length, goal, location.length, mediaUrl, deadline, about.length])
+    }, [title, description, goal, location, mediaUrl, deadline, about.length])
 
     useEffect(() => {
         dispatch(getCategoriesThunk())
@@ -60,8 +60,8 @@ export default function CreateProject() {
         };
 
         try {
-            await dispatch(createProject(payload));
-            navigate(`/projects`);
+            let newProject = await dispatch(createProject(payload));
+            navigate(`/projects/${+newProject.id}`);
         } catch (err) {
             const errorMessage = await err.json();
             setErrors(errorMessage.error || 'Something went wrong.');
@@ -70,7 +70,6 @@ export default function CreateProject() {
 
     return (
         <div className="create-project-container">
-            {/* TODO Uncomment after completing route testing */}
             {(!user) ? navigate("/login") : null}
             <h1>Start a new Project!</h1>
             {Object.keys(errors).length ? <p className="error-message">{Object.values(errors)[0]}</p> : null}
@@ -110,7 +109,7 @@ export default function CreateProject() {
                         required
                     />
                 </label>
-                <label className={"location" + `${errors.location ? "-error" : ''}`}>
+                <label className={`${'location' + errors.location ? "-error" : ''}`}>
                     Location:
                     <input
                         type="text"

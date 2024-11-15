@@ -4,7 +4,9 @@ import { fetchOneProject } from '../../store/projects';
 import { useParams, useNavigate } from 'react-router-dom';
 import { DeleteProjectModal } from '../DeleteModals/index';
 import OpenModalButton from '../OpenModalButton/OpenModalButton.jsx';
+import { ProjectsByCategory } from './index.js';
 import './Projects.css';
+import { getCategoriesThunk } from '../../store/categories.js';
 
 export default function ProjectsById() {
     const { projectId } = useParams();
@@ -13,9 +15,11 @@ export default function ProjectsById() {
 
     const project = useSelector(state => state.projects[+projectId]);
     const user = useSelector(state => state.session.user);
+    const category = useSelector(state => state.categories[project.category_id]);
 
     useEffect(() => {
         dispatch(fetchOneProject(+projectId));
+        dispatch(getCategoriesThunk())
     }, [dispatch, projectId]);
 
     if (!project) return <h1 className='loading'>Loading...</h1>;
@@ -56,6 +60,7 @@ export default function ProjectsById() {
                             className='delete-project'
                         />
                         <button className='update-project' onClick={() => { navigate(`/projects/${projectId}/update`) }}> Update Project</button>
+                        <button className='update-rewards' onClick={() => { navigate(`/projects/${projectId}/rewards`) }}> Update Rewards</button>
                     </div>
                 )
                     :
@@ -66,6 +71,8 @@ export default function ProjectsById() {
                         Back this Project
                     </button>)}
             </div>
+            <h3>Other {category.title} Projects</h3>
+            <ProjectsByCategory categoryId={project.category_id} />
         </div>
     );
 }
