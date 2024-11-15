@@ -12,6 +12,8 @@ def check_project_ownership(func):
         user_id = request.headers.get('user_id')
         if user_id == None:
             user_id = request.cookies.get('user_id')
+        if project_id == None:
+            project_id = request.headers.get(project_id)
 
         if not user_id:
             return jsonify({"error": "User ID is required in headers or as a cookie"}), 401
@@ -60,6 +62,8 @@ def update_project(id):
     project = Project.query.get_or_404(id)
     data = request.get_json()
     
+    project.body = data.get('body', project.body)
+    project.location = data.get('location', project.location)
     project.title = data.get('title', project.title)
     project.description = data.get('description', project.description)
     project.goal = data.get('goal', project.goal)
