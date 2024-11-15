@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_REWARDS = 'rewards/GET'
 const ADD_REWARDS = 'rewards/ADD'
+const UPDATE_REWARD = 'rewards/UPDATE'
 const DELETE_REWARDS = 'rewards/DELETE'
 
 const getRewards = ( rewards ) => ({
@@ -12,6 +13,13 @@ const getRewards = ( rewards ) => ({
 const addReward = ( reward ) => {
     return {
         type: ADD_REWARDS,
+        reward
+    }
+}
+
+const updateReward = ( reward ) => {
+    return {
+        type: UPDATE_REWARD,
         reward
     }
 }
@@ -54,6 +62,17 @@ export const addRewardThunk = ( payload ) => async ( dispatch ) => {
     }
 }
 
+export const updateRewardThunk = ( rewardId, payload, userId ) => async ( dispatch ) => {
+    const res = await csrfFetch(`/api/rewards/${rewardId}`, {
+        method: 'PUT',
+        body: JSON.stringify( payload ),
+        headers: { 'userId': userId }
+    })
+    const editReward = await res.json()
+    dispatch(updateReward(editReward))
+    return editReward
+}
+
 export const deleteRewardThunk = ( rewardId ) => async ( dispatch ) => {
     try {
         await csrfFetch(`/api/rewards/${rewardId}`, {
@@ -79,6 +98,13 @@ export default function rewardReducer( state = {}, action ) {
             return {
                 ...state,
                 [action.reward.id]: action.reward
+            }
+        }
+        case UPDATE_REWARD: {
+            const updatedReward = action.reward;
+            return {
+                ...state,
+                [updatedReward.id]: updateReward
             }
         }
         case DELETE_REWARDS: {
