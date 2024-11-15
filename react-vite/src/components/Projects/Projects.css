@@ -253,14 +253,52 @@
         font-size: 16px;
         background-color: rgb(0, 43, 92);
     }
+
+    .update-rewards {
+        padding: 10px 20px;
+        margin-top: 10px;
+        cursor: pointer;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: rgb(0, 179, 21);
+    }
 }
 
 .update-project:hover {
     background-color: rgb(0, 90, 194);
     transition: background-color 0.3s ease;
+    transform: translateY(-2.75px);
+    transition: transform 0.4s ease;
 }
 
-.delete-project:hover {
+.update-rewards:hover {
+    background-color: rgb(2, 204, 26);
+    transition: background-color 0.3s ease;
+    transform: translateY(-2.75px);
+    transition: transform 0.4s ease;
+}
+
+.delete-project:hover,
+.cancel-update:hover {
     background-color: rgb(123, 0, 0);
     transition: background-color 0.3s ease;
+    transform: translateY(2.75px);
+    transition: transform 0.4s ease;
+}
+
+.cancel-update {
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: red;
+}
+
+.description-update {
+    height: 100px;
 }

@@ -13,7 +13,7 @@ def check_project_ownership(func):
         if user_id == None:
             user_id = request.cookies.get('user_id')
         if project_id == None:
-            project_id = request.headers.get(project_id)
+            project_id = request.headers.get('project_id')
 
         if not user_id:
             return jsonify({"error": "User ID is required in headers or as a cookie"}), 401
