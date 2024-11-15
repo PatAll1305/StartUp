@@ -22,7 +22,7 @@ const Rewards = () => {
                 {rewards.map((reward) => (
                 <div className="rewards-content" key={reward.id}>
                     <h4 className="rewards-desc">{reward.content}</h4>
-                    <button>Pledge: ${reward.pledge}</button>
+                    <button>Pledge: ${reward.pledge.toFixed(2)}</button>
                 </div>
             ))}
             <div

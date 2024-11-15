@@ -13,6 +13,7 @@ def get_rewards():
 @check_project_ownership
 def create_reward():
     data = request.get_json()
+    print(data)
     new_reward = Reward(
         project_id = data['project_id'],
         pledge = data['pledge'],

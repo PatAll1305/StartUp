@@ -13,7 +13,8 @@ def check_project_ownership(func):
         if user_id == None:
             user_id = request.cookies.get('user_id')
         if project_id == None:
-            project_id = request.headers.get(project_id)
+            project_id = request.headers.get('project_id')
+        print('-------------------------------------------------------------', project_id)
 
         if not user_id:
             return jsonify({"error": "User ID is required in headers or as a cookie"}), 401
@@ -61,14 +62,14 @@ def get_project(id):
 def update_project(id):
     project = Project.query.get_or_404(id)
     data = request.get_json()
-    
+
     project.body = data.get('body', project.body)
     project.location = data.get('location', project.location)
     project.title = data.get('title', project.title)
     project.description = data.get('description', project.description)
     project.goal = data.get('goal', project.goal)
     project.media_url = data.get('media_url', project.media_url)
-    
+
     if 'deadline' in data:
         try:
             project.deadline = datetime.strptime(data['deadline'], "%Y-%m-%d %H:%M:%S.%f")
@@ -76,9 +77,9 @@ def update_project(id):
             project.deadline = datetime.strptime(data['deadline'], "%Y-%m-%d %H:%M:%S")
 
     project.category_id = data.get('category_id', project.category_id)
-    
+
     db.session.commit()
-    
+
     return jsonify(project.to_dict())
 
 @project_routes.route('/<int:id>', methods=['DELETE'])
@@ -88,5 +89,3 @@ def delete_project(id):
     db.session.delete(project)
     db.session.commit()
     return jsonify({"message": "Project deleted"}), 204
-
-
