@@ -1,16 +1,12 @@
 // import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import OpenModalMenuItem from "./OpenModalMenuItem";
-// import LoginFormModal from "../LoginFormModal";
-// import SignupFormModal from "../SignupFormModal";
 import ProfileButton from './ProfileButton';
+// import { getCategoriesThunk } from "../../store/categories";
 import "./Navigation.css";
 
 function Navigation() {
   const sessionUser = useSelector(state => state.session.user);
-  // const [showLoginModal, setShowLoginModal] = useState(false);
-  // const [showSignupModal, setShowSignupModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -69,6 +65,7 @@ function Navigation() {
           </>
         )}
       </li>
+      
     </ul>
   );
 }
