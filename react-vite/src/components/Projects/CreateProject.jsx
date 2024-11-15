@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createProject } from '../../store/projects';
-import { csrfFetch } from '../../store/csrf';
+import { getCategoriesThunk } from '../../store/categories';
 import './Projects.css';
 
 export default function CreateProject() {
@@ -10,7 +10,8 @@ export default function CreateProject() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(state => state.session.user);
-    const [categories, setCategories] = useState({})
+    const categories = useSelector(state => state.categories)
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [about, setAbout] = useState('');
@@ -18,6 +19,7 @@ export default function CreateProject() {
     const [location, setLocation] = useState('');
     const [mediaUrl, setMediaUrl] = useState('');
     const [deadline, setDeadline] = useState('');
+    const [category, setCategory] = useState('')
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
@@ -39,12 +41,8 @@ export default function CreateProject() {
     }, [title.length, description.length, goal, location.length, mediaUrl, deadline, about.length])
 
     useEffect(() => {
-        getCategories = async () => {
-            const categories = await csrfFetch('/api/categories')
-            return categories.toJson()
-        }
-        let categories = 
-    })
+        dispatch(getCategoriesThunk())
+    }, [dispatch])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,17 +50,18 @@ export default function CreateProject() {
         const payload = {
             title,
             description,
-            about,
+            body: about,
             goal,
             location,
             media_url: mediaUrl,
             deadline,
+            category_id: +category,
             user_id: user.id,
         };
 
         try {
             await dispatch(createProject(payload));
-            navigate('/projects');
+            navigate(`/projects`);
         } catch (err) {
             const errorMessage = await err.json();
             setErrors(errorMessage.error || 'Something went wrong.');
@@ -72,7 +71,7 @@ export default function CreateProject() {
     return (
         <div className="create-project-container">
             {/* TODO Uncomment after completing route testing */}
-            {/* {(!user) ? navigate("/login") : null} */}
+            {(!user) ? navigate("/login") : null}
             <h1>Start a new Project!</h1>
             {Object.keys(errors).length ? <p className="error-message">{Object.values(errors)[0]}</p> : null}
             <form onSubmit={handleSubmit} className="create-project-form">
@@ -111,7 +110,7 @@ export default function CreateProject() {
                         required
                     />
                 </label>
-                <label className={"location" + errors.location ? "-error" : ''}>
+                <label className={"location" + `${errors.location ? "-error" : ''}`}>
                     Location:
                     <input
                         type="text"
@@ -120,7 +119,7 @@ export default function CreateProject() {
                         required
                     />
                 </label>
-                <label className={"media-url" + errors.mediaUrl ? "-error" : ''}>
+                <label className={"media-url" + (errors.mediaUrl ? "-error" : '')}>
                     Media URL:
                     <input
                         type="url"
@@ -130,7 +129,7 @@ export default function CreateProject() {
                         required
                     />
                 </label>
-                <label className={"deadline" + errors.deadline ? "-error" : ''}>
+                <label className={"deadline" + (errors.deadline ? "-error" : '')}>
                     Deadline:
                     <input
                         type="date"
@@ -139,11 +138,18 @@ export default function CreateProject() {
                         required
                     />
                 </label>
-                <select>
-                    { }
+                <select onChange={(e) => setCategory(e.target.value)} className='category-select'>
+                    {Object.values(categories).map((category) => (
+                        <option
+                            key={category.id}
+                            value={category.id}
+                        >
+                            {category.title}
+                        </option>
+                    ))}
                 </select>
                 <button disabled={Object.keys(errors).length} type="submit">Create Project</button>
             </form>
-        </div>
+        </div >
     );
 }
