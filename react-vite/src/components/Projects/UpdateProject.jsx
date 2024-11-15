@@ -48,7 +48,6 @@ export default function UpdateProject() {
         if (!location.length || location.split(', ').length !== 2 || location.split(', ')[1].length !== 2) validationErrors.location = "Location should be in 'City, State' format"
         if (!mediaUrl.includes('http://') && !mediaUrl.includes('https://')) validationErrors.mediaUrl = "Media URL must start with 'http' or 'https'";
         if (Date.parse(deadline) <= new Date()) validationErrors.deadline = "Deadline cannot be in the past";
-        console.log(location.split(', ').length === 2)
         setErrors(validationErrors);
     }, [title, description, goal, location, mediaUrl, deadline]);
 

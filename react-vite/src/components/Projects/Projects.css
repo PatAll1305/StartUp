@@ -302,3 +302,7 @@
 .description-update {
     height: 100px;
 }
+
+#back-button {
+    cursor: pointer
+}
