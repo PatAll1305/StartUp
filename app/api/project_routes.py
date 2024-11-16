@@ -68,6 +68,7 @@ def update_project(id):
     project.description = data.get('description', project.description)
     project.goal = data.get('goal', project.goal)
     project.media_url = data.get('media_url', project.media_url)
+    project.amount = data.get('amount', project.amount)
 
     if 'deadline' in data:
         try:

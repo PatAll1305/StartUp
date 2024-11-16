@@ -1,18 +1,27 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchBackedProjects } from '../../store/backedProjects';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ConfirmCancelBackingModal } from '../DeleteModals';
 import './BackedProjects.css'
+import OpenModalButton from '../OpenModalButton/OpenModalButton';
 
-const BackedProjects = () => {
+export default function BackedProjects() {
+    const { userId } = useParams();
     const dispatch = useDispatch();
     const backedProjects = useSelector((state) => state.backedProjects);
+    const navigate = useNavigate();
+
+    const handleChangePledgeClick = (id) => {
+        navigate(`/user/${userId}/backed/${id}`);
+    };
 
     useEffect(() => {
         dispatch(fetchBackedProjects());
     }, [dispatch]);
 
     if (!backedProjects || Object.keys(backedProjects).length === 0) {
-        return <p>No backed projects found.</p>;
+        return <h1 className='loading'>No backed projects found.</h1>;
     }
 
     const projectsByCategory = {};
@@ -27,22 +36,46 @@ const BackedProjects = () => {
 
     return (
         <div className="backed-projects-container">
+            <h2 onClick={() => { navigate(-1) }} id='back-button' >{`< Back`}</h2>
             {Object.entries(projectsByCategory).map(([category, projects]) => (
                 <div key={category} className="category-section">
                     <h2>{category}</h2>
                     <div className="backed-projects-list">
-                        {projects.map((project) => (
-                            <div key={project.id} className="backed-project-card">
-                                <h3>{project.title}</h3>
-                                <p>{project.description}</p>
-                                <p>Goal: ${project.goal}</p>
-                            </div>
-                        ))}
+                        {projects?.map((project) => {
+                            const backing = Object.values(backedProjects).find(
+                                (bp) => bp.project_id === project?.id
+                            );
+                            return (
+                                <div key={project?.id} className="backed-project-card" >
+                                    <h3 onClick={() => { navigate(`/projects/${project?.id}`) }}>{project?.title}</h3>
+                                    <p onClick={() => { navigate(`/projects/${project?.id}`) }}>{project?.description}</p>
+                                    <p onClick={() => { navigate(`/projects/${project?.id}`) }}>Goal: ${project?.goal}</p>
+                                    <p onClick={() => { navigate(`/projects/${project?.id}`) }}>You donated: ${Number(backing?.donation_amount).toFixed(2)}</p>
+                                    <button
+                                        className="change-pledge-button"
+                                        onClick={(e) => {
+                                            e.preventDefault()
+                                            handleChangePledgeClick(backing.id)
+                                        }
+                                        }
+                                    >
+                                        Change Pledge
+                                    </button>
+                                    {backing && (
+                                        <OpenModalButton
+                                            buttonText="Cancel Backing"
+                                            modalComponent={
+                                                <ConfirmCancelBackingModal backing={backing} />
+                                            }
+                                            className="cancel-backing-button"
+                                        />
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             ))}
         </div>
     );
-};
-
-export default BackedProjects;
+}

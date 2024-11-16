@@ -6,7 +6,7 @@ import Layout from './Layout';
 import HomePage from '../components/HomePage/Homepage';
 import AuthLayout from './AuthLayout';
 import { Rewards, CreateRewards } from '../components/Rewards/index';
-import { BackedProjects } from '../components/BackedProjects/index'
+import { BackedProjects, ChangeBacking } from '../components/BackedProjects/index'
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: 'user/:userId/backed-projects',
         element: <BackedProjects />
+      },
+      {
+        path: 'user/:userId/backed/:backedProjectId',
+        element: <ChangeBacking />
       }
     ],
   },
