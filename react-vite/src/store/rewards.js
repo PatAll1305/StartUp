@@ -65,11 +65,14 @@ export const addRewardThunk = ( payload, userId, projectId ) => async ( dispatch
     }
 }
 
-export const updateRewardThunk = ( rewardId, payload, userId ) => async ( dispatch ) => {
+export const updateRewardThunk = ( payload, userId, projectId, rewardId ) => async ( dispatch ) => {
     const res = await csrfFetch(`/api/rewards/${rewardId}`, {
         method: 'PUT',
         body: JSON.stringify( payload ),
-        headers: { 'userId': userId }
+        headers: {
+            'userId': userId,
+            'projectId': projectId
+         }
     })
     const editReward = await res.json()
     dispatch(updateReward(editReward))

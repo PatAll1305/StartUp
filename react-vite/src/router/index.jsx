@@ -5,7 +5,7 @@ import { Projects, ProjectsById, CreateProject, UpdateProject, ProjectsByCategor
 import Layout from './Layout';
 import HomePage from '../components/HomePage/Homepage';
 import AuthLayout from './AuthLayout';
-import { Rewards, CreateRewards } from '../components/Rewards/index';
+import { Rewards, CreateRewards, EditReward } from '../components/Rewards/index';
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: 'projects/:projectId/rewards/create',
         element: <CreateRewards />
+      },
+      {
+        path: 'projects/:projectId/rewards/:rewardId/edit',
+        element: <EditReward />
       }
     ],
   },
