@@ -49,11 +49,13 @@ def view_backed_projects():
                 "project_id": bp.project_id,
                 "reward_id": bp.reward_id,
                 "user_id": bp.user_id,
+                "donation_amount": bp.donation_amount,
                 "project": {
                     "id": project.id,
                     "title": project.title,
                     "description": project.description,
                     "goal": float(project.goal),
+                    "amount": float(project.amount),
                     "category": project.category.title if project.category else None,
                 },
             })
@@ -67,18 +69,31 @@ def view_backed_projects():
 @backed_project_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_backed_project(id):
-    form = UpdateBackedProjectForm()
-    if form.validate_on_submit():
-      backed_project = BackedProject.query.get(id)
+    data = request.get_json()
+    
+    if not data or not isinstance(data, dict):
+        return jsonify({"error": "Invalid data format"}), 400
 
-      if not backed_project or backed_project.user_id != current_user.id:
+    backed_project = BackedProject.query.get(id)
+
+    if not backed_project or backed_project.user_id != current_user.id:
         return jsonify({"error": "Unauthorized"}), 404
 
-      backed_project.reward_id = form.data['reward_id']
-      db.session.commit()
-      return jsonify(backed_project.to_dict())
+    donation_amount = data.get('donation_amount')
+    reward_id = data.get('reward_id')
 
-    return jsonify(form.errors), 400
+    if donation_amount is not None:
+        if not isinstance(donation_amount, int):
+            return jsonify({"error": "donation_amount must be an integer"}), 400
+        backed_project.donation_amount = donation_amount
+
+    if reward_id is not None:
+        if not isinstance(reward_id, int):
+            return jsonify({"error": "reward_id must be an integer"}), 400
+        backed_project.reward_id = reward_id
+
+    db.session.commit()
+    return jsonify(backed_project.to_dict()), 200
 
 # Cancel backing 
 @backed_project_routes.route('/<int:id>', methods=['DELETE'])

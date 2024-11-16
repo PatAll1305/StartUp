@@ -11,7 +11,7 @@ seed_project_data = [
         "goal": 5000.00,
         "amount": 1200.00,
         "location": "New York, NY",
-        "media_url": "https://example.com/media/alpha.jpg",
+        "media_url": "https://yt3.googleusercontent.com/EWx42Dd538aX19hZtLvFdpxNFwVAvuurEPb39iFVgew2j2TmRg6pqHHDsabsMyXg1JUnOj8e=s900-c-k-c0x00ffffff-no-rj",
         "deadline": datetime.now() + timedelta(days=30),
         "category_id": 13
     },
@@ -23,7 +23,7 @@ seed_project_data = [
         "goal": 1500.00,
         "amount": 600.00,
         "location": "San Francisco, CA",
-        "media_url": "https://example.com/media/beta.jpg",
+        "media_url": "https://images.javatpoint.com/tutorial/software-testing/images/beta-testing-logo.png",
         "deadline": datetime.now() + timedelta(days=15),
         "category_id": 13
     },
@@ -35,7 +35,7 @@ seed_project_data = [
         "goal": 10000.00,
         "amount": 2500.00,
         "location": "Chicago, IL",
-        "media_url": "https://example.com/media/data-analysis.jpg",
+        "media_url": "https://www.sagedata.net/wp-content/uploads/2021/07/cohort-analysis.png",
         "deadline": datetime.now() + timedelta(days=45),
         "category_id": 4
     },
@@ -47,7 +47,7 @@ seed_project_data = [
         "goal": 8000.00,
         "amount": 3200.00,
         "location": "Austin, TX",
-        "media_url": "https://example.com/media/ecommerce.jpg",
+        "media_url": "https://scandiweb.com/blog/wp-content/uploads/2023/03/customer-centric-ecommerce-redesign-banner-2.png",
         "deadline": datetime.now() + timedelta(days=60),
         "category_id": 4
     },
@@ -59,7 +59,7 @@ seed_project_data = [
         "goal": 20000.00,
         "amount": 7500.00,
         "location": "Boston, MA",
-        "media_url": "https://example.com/media/ml-pipeline.jpg",
+        "media_url": "https://www.xenonstack.com/hs-fs/hubfs/xenonstack-machine-learning-pipeline.png?width=1280&height=720&name=xenonstack-machine-learning-pipeline.png",
         "deadline": datetime.now() + timedelta(days=90),
         "category_id": 13
     },
@@ -71,7 +71,7 @@ seed_project_data = [
         "goal": 12000.00,
         "amount": 4600.00,
         "location": "Los Angeles, CA",
-        "media_url": "https://example.com/media/mobile-app.jpg",
+        "media_url": "https://www.orientsoftware.com/Themes/Content/Images/blog/2024-04-22/mobile-app-development-trend.jpg",
         "deadline": datetime.now() + timedelta(days=50),
         "category_id": 13
     },
@@ -83,7 +83,7 @@ seed_project_data = [
         "goal": 3000.00,
         "amount": 1250.00,
         "location": "Miami, FL",
-        "media_url": "https://example.com/media/feedback.jpg",
+        "media_url": "https://www.rapidoform.com/be/images/blog/Customer%20Feedback%20System.png",
         "deadline": datetime.now() + timedelta(days=25),
         "category_id": 13
     },
@@ -95,7 +95,7 @@ seed_project_data = [
         "goal": 15000.00,
         "amount": 5000.00,
         "location": "Seattle, WA",
-        "media_url": "https://example.com/media/game-dev.jpg",
+        "media_url": "https://hiretop.com/content/images/2023/05/Masters-in-Game-Development.jpeg",
         "deadline": datetime.now() + timedelta(days=120),
         "category_id": 8
     },
@@ -107,7 +107,7 @@ seed_project_data = [
         "goal": 7000.00,
         "amount": 2500.00,
         "location": "Philadelphia, PA",
-        "media_url": "https://example.com/media/chat-app.jpg",
+        "media_url": "https://files.ably.io/ghost/prod/2023/01/build-a-realtime-chat-app-from-scratch--1-.png",
         "deadline": datetime.now() + timedelta(days=40),
         "category_id": 13
     },
@@ -119,7 +119,7 @@ seed_project_data = [
         "goal": 2500.00,
         "amount": 1300.00,
         "location": "Denver, CO",
-        "media_url": "https://example.com/media/ai-chatbot.jpg",
+        "media_url": "https://miro.medium.com/v2/resize:fit:1400/0*RPJnm1-q-d7dJoTK.png",
         "deadline": datetime.now() + timedelta(days=20),
         "category_id": 6
     },
@@ -131,7 +131,7 @@ seed_project_data = [
         "goal": 6000.00,
         "amount": 2750.00,
         "location": "Las Vegas, NV",
-        "media_url": "https://example.com/media/social-media.jpg",
+        "media_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlPcMz6yKhiYJ_-MQKKh3gpq2lSW4dYWGLQw&s",
         "deadline": datetime.now() + timedelta(days=35),
         "category_id": 6
     },
@@ -143,7 +143,7 @@ seed_project_data = [
         "goal": 5000.00,
         "amount": 2100.00,
         "location": "Houston, TX",
-        "media_url": "https://example.com/media/inventory.jpg",
+        "media_url": "https://www.waoconnect.com/wp-content/uploads/2020/07/Inventory-Management-System-Pic.jpg",
         "deadline": datetime.now() + timedelta(days=75),
         "category_id": 4
     },
@@ -155,7 +155,7 @@ seed_project_data = [
         "goal": 3000.00,
         "amount": 1400.00,
         "location": "Chicago, IL",
-        "media_url": "https://example.com/media/backup.jpg",
+        "media_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0YlMSjU6kzrybBPc4utNPlJyWv08mC_XGeA&s",
         "deadline": datetime.now() + timedelta(days=45),
         "category_id": 13
     },
@@ -167,7 +167,7 @@ seed_project_data = [
         "goal": 15000.00,
         "amount": 7800.00,
         "location": "Portland, OR",
-        "media_url": "https://example.com/media/weather.jpg",
+        "media_url": "https://letstalkscience.ca/sites/default/files/2019-09/weather-station-in-iceland.jpg",
         "deadline": datetime.now() + timedelta(days=110),
         "category_id": 13
     },
@@ -179,7 +179,7 @@ seed_project_data = [
         "goal": 2000.00,
         "amount": 700.00,
         "location": "Phoenix, AZ",
-        "media_url": "https://example.com/media/expense.jpg",
+        "media_url": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d6/33/3d/d6333d62-028e-cfb0-badd-84a14c5b23dd/AppIcon-1x_U007emarketing-0-7-0-0-85-220-0.png/256x256bb.jpg",
         "deadline": datetime.now() + timedelta(days=30),
         "category_id": 3
     },
@@ -191,7 +191,7 @@ seed_project_data = [
         "goal": 13000.00,
         "amount": 5200.00,
         "location": "Baltimore, MD",
-        "media_url": "https://example.com/media/hr.jpg",
+        "media_url": "https://planetpci-tech.com/wp-content/uploads/2020/07/best-human-resource-management-software.png",
         "deadline": datetime.now() + timedelta(days=80),
         "category_id": 13
     },
@@ -203,7 +203,7 @@ seed_project_data = [
         "goal": 18000.00,
         "amount": 9200.00,
         "location": "San Diego, CA",
-        "media_url": "https://example.com/media/streaming.jpg",
+        "media_url": "https://www.vdocipher.com/blog/wp-content/uploads/2023/07/Roadmap-to-create-a-video-streaming-website.png",
         "deadline": datetime.now() + timedelta(days=90),
         "category_id": 6
     },
@@ -215,7 +215,7 @@ seed_project_data = [
         "goal": 9500.00,
         "amount": 3600.00,
         "location": "Dallas, TX",
-        "media_url": "https://example.com/media/smart-home.jpg",
+        "media_url": "https://cielowigle.com/wp-content/uploads/2021/03/woman-controlling-smart-home-appliances.jpg",
         "deadline": datetime.now() + timedelta(days=65),
         "category_id": 13
     },
@@ -227,7 +227,7 @@ seed_project_data = [
         "goal": 8000.00,
         "amount": 4100.00,
         "location": "Newark, NJ",
-        "media_url": "https://example.com/media/photo-editing.jpg",
+        "media_url": "https://www.cleveroad.com/images/article-previews/basic-features-to-integrate-to-a-filter-app-63-3x.webp",
         "deadline": datetime.now() + timedelta(days=100),
         "category_id": 11
     },
@@ -239,7 +239,7 @@ seed_project_data = [
         "goal": 4000.00,
         "amount": 1850.00,
         "location": "Atlanta, GA",
-        "media_url": "https://example.com/media/fitness.jpg",
+        "media_url": "https://www.apptunix.com/blog/wp-content/uploads/sites/3/2020/04/Health-Tracking-apps.jpg",
         "deadline": datetime.now() + timedelta(days=50),
         "category_id": 7
     },
@@ -251,7 +251,7 @@ seed_project_data = [
     "goal": 5000.00,
     "amount": 2100.00,
     "location": "Detroit, MI",
-    "media_url": "https://example.com/media/learning-platform.jpg",
+    "media_url": "https://inoxoft.com/wp-content/uploads/2024/04/2_2-scaled.jpg.webp",
     "deadline": datetime.now() + timedelta(days=35),
     "category_id": 15
     },
@@ -263,7 +263,7 @@ seed_project_data = [
     "goal": 8000.00,
     "amount": 3500.00,
     "location": "Miami, FL",
-    "media_url": "https://example.com/media/blockchain-wallet.jpg",
+    "media_url": "https://www.antiersolutions.com/wp-content/uploads/2023/05/banner02-3-1.jpg",
     "deadline": datetime.now() + timedelta(days=55),
     "category_id": 13
     },
@@ -275,7 +275,7 @@ seed_project_data = [
     "goal": 9000.00,
     "amount": 4600.00,
     "location": "Los Angeles, CA",
-    "media_url": "https://example.com/media/food-delivery.jpg",
+    "media_url": "https://www.businessofapps.com/wp-content/uploads/2022/01/emizen_tech_food_deliver_img1.png",
     "deadline": datetime.now() + timedelta(days=60),
     "category_id": 7
     },
@@ -287,7 +287,7 @@ seed_project_data = [
     "goal": 7000.00,
     "amount": 3700.00,
     "location": "San Francisco, CA",
-    "media_url": "https://example.com/media/digital-art.jpg",
+    "media_url": "https://www.antiersolutions.com/wp-content/uploads/2022/09/image_2022_09_27T11_49_39_879Z.png.webp",
     "deadline": datetime.now() + timedelta(days=65),
     "category_id": 1
     },
@@ -299,7 +299,7 @@ seed_project_data = [
     "goal": 15000.00,
     "amount": 7200.00,
     "location": "New York, NY",
-    "media_url": "https://example.com/media/vr-travel.jpg",
+    "media_url": "https://www-sygic.akamaized.net/content/14-blog/0-2017/20170927-explore-the-world-with-sygic-travel-vr/1.png",
     "deadline": datetime.now() + timedelta(days=80),
     "category_id": 11
     },
@@ -311,7 +311,7 @@ seed_project_data = [
     "goal": 5000.00,
     "amount": 2500.00,
     "location": "Seattle, WA",
-    "media_url": "https://example.com/media/ai-writing.jpg",
+    "media_url": "https://writerzen.net/storage/photos/1/blog-3.2/ai-writing-assistant-enhance-not-replace-writers-creativity.webp",
     "deadline": datetime.now() + timedelta(days=50),
     "category_id": 13
     },
@@ -323,7 +323,7 @@ seed_project_data = [
     "goal": 10000.00,
     "amount": 3300.00,
     "location": "San Diego, CA",
-    "media_url": "https://example.com/media/language-learning.jpg",
+    "media_url": "https://storage.googleapis.com/static-greenice-net/public/posts/122%20-%20Language%20Learning/language%20website%20steps.png",
     "deadline": datetime.now() + timedelta(days=90),
     "category_id": 15
     },
@@ -335,7 +335,7 @@ seed_project_data = [
     "goal": 12000.00,
     "amount": 5000.00,
     "location": "Houston, TX",
-    "media_url": "https://example.com/media/home-automation.jpg",
+    "media_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV0vIZW7-KtSzMA84e2nEs-I75FLpgYtnEWA&s",
     "deadline": datetime.now() + timedelta(days=75),
     "category_id": 13
     },
@@ -347,7 +347,7 @@ seed_project_data = [
     "goal": 15000.00,
     "amount": 6300.00,
     "location": "Phoenix, AZ",
-    "media_url": "https://example.com/media/ev-charging.jpg",
+    "media_url": "https://images.tristatetechnology.com/blog-images/uploads/2021/12/EV-charging-station-finder-App-Work.jpg",
     "deadline": datetime.now() + timedelta(days=110),
     "category_id": 13
     },
@@ -359,7 +359,7 @@ seed_project_data = [
     "goal": 4000.00,
     "amount": 1500.00,
     "location": "Chicago, IL",
-    "media_url": "https://example.com/media/eco-packaging.jpg",
+    "media_url": "https://calbizjournal.com/wp-content/uploads/2023/09/recycled-boxes.jpg",
     "deadline": datetime.now() + timedelta(days=25),
     "category_id": 4
     },
