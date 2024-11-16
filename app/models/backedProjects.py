@@ -11,6 +11,7 @@ class BackedProject(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id' if environment == "production" else 'users.id', ondelete='CASCADE'), nullable=False)
   project_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.projects.id' if environment == "production" else 'projects.id', ondelete='CASCADE'), nullable=False)
   reward_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.rewards.id' if environment == "production" else 'rewards.id', ondelete='SET NULL'))
+  created_at = db.Column(db.DateTime, default=datetime.now())
 
   user = db.relationship('User', back_populates='backed_projects')
   project = db.relationship('Project', back_populates='backed_projects')
