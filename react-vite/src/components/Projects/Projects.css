@@ -35,7 +35,8 @@
 
     img {
         width: 50%;
-        height: 90%;
+        height: 65%;
+        padding: 10px;
     }
 
     li {
@@ -61,12 +62,6 @@
     margin: 5px 0;
 }
 
-.project-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-}
-
 .project-item {
     border-bottom: 1px solid #ddd;
     padding: 15px 0;
@@ -86,7 +81,7 @@
 }
 
 #project-media {
-    max-width: 100%;
+    width: 50%;
     height: auto;
     margin-top: 10px;
 }
