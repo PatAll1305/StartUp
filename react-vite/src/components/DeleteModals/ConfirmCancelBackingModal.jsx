@@ -2,15 +2,20 @@ import { deleteBacking } from '../../store/backedProjects';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import "./DeleteModal.css"
+import { updateProject } from '../../store/projects';
 
-export default function ConfirmCancelBackingModal({ backingId }) {
+export default function ConfirmCancelBackingModal({ backing }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
 
-    const handleConfirmCancel = async () => {
+    console.log("backing", backing)
+
+    const handleConfirmCancel = () => {
         try {
-            dispatch(deleteBacking(backingId));
+            dispatch(deleteBacking(backing.id));
+            dispatch(updateProject(backing.project.id, { amount: backing.project.amount - backing.donation_amount }))
             closeModal();
+            window.location.reload()
         } catch (error) {
             window.alert("Something went wrong");
         }

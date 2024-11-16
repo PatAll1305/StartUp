@@ -56,6 +56,7 @@ def view_backed_projects():
                     "description": project.description,
                     "goal": float(project.goal),
                     "amount": float(project.amount),
+                    "user_id": project.user_id,
                     "category": project.category.title if project.category else None,
                 },
             })
@@ -72,6 +73,7 @@ def update_backed_project(id):
     data = request.get_json()
     
     if not data or not isinstance(data, dict):
+        print('++++++++++++++++++++++++',data)
         return jsonify({"error": "Invalid data format"}), 400
 
     backed_project = BackedProject.query.get(id)
@@ -83,8 +85,6 @@ def update_backed_project(id):
     reward_id = data.get('reward_id')
 
     if donation_amount is not None:
-        if not isinstance(donation_amount, int):
-            return jsonify({"error": "donation_amount must be an integer"}), 400
         backed_project.donation_amount = donation_amount
 
     if reward_id is not None:

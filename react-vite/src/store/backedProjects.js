@@ -29,7 +29,7 @@ export const fetchBackedProjects = () => async (dispatch) => {
     throw new Error('Failed to fetch backed projects');
 };
 
-export const updateBackedProject = ({ id, donation_amount, reward_id }) => async (dispatch) => {
+export const updateBackedProject = (id, donation_amount, reward_id) => async (dispatch) => {
     let payload = {};
     if (donation_amount) {
         payload.donation_amount = donation_amount
@@ -38,7 +38,7 @@ export const updateBackedProject = ({ id, donation_amount, reward_id }) => async
         payload.reward_id = reward_id
     }
 
-    const res = await csrfFetch(`/api/backed-projects/${id}`, {
+    const res = await csrfFetch(`/api/backed_projects/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

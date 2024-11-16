@@ -41,16 +41,16 @@ export default function BackedProjects() {
                 <div key={category} className="category-section">
                     <h2>{category}</h2>
                     <div className="backed-projects-list">
-                        {projects.map((project) => {
+                        {projects?.map((project) => {
                             const backing = Object.values(backedProjects).find(
-                                (bp) => bp.project_id === project.id
+                                (bp) => bp.project_id === project?.id
                             );
                             return (
                                 <div key={project?.id} className="backed-project-card" >
-                                    <h3 onClick={() => { navigate(`/projects/${project.id}`) }}>{project?.title}</h3>
-                                    <p onClick={() => { navigate(`/projects/${project.id}`) }}>{project?.description}</p>
-                                    <p onClick={() => { navigate(`/projects/${project.id}`) }}>Goal: ${project?.goal}</p>
-                                    <p onClick={() => { navigate(`/projects/${project.id}`) }}>You donated: ${Number(backing.donation_amount).toFixed(2)}</p>
+                                    <h3 onClick={() => { navigate(`/projects/${project?.id}`) }}>{project?.title}</h3>
+                                    <p onClick={() => { navigate(`/projects/${project?.id}`) }}>{project?.description}</p>
+                                    <p onClick={() => { navigate(`/projects/${project?.id}`) }}>Goal: ${project?.goal}</p>
+                                    <p onClick={() => { navigate(`/projects/${project?.id}`) }}>You donated: ${Number(backing?.donation_amount).toFixed(2)}</p>
                                     <button
                                         className="change-pledge-button"
                                         onClick={(e) => {
@@ -65,7 +65,7 @@ export default function BackedProjects() {
                                         <OpenModalButton
                                             buttonText="Cancel Backing"
                                             modalComponent={
-                                                <ConfirmCancelBackingModal backingId={backing.id} />
+                                                <ConfirmCancelBackingModal backing={backing} />
                                             }
                                             className="cancel-backing-button"
                                         />

@@ -14,21 +14,23 @@ export default function ChangeBacking() {
     const [errors, setErrors] = useState({})
 
     useEffect(() => {
+        dispatch(fetchBackedProjects())
+    }, [dispatch])
+
+    useEffect(() => {
         if (backedProject) {
-            setDonationAmount(backedProject.donation_amount);
-            setOriginalAmount(backedProject.donation_amount);
+            setDonationAmount(Number(backedProject.donation_amount).toFixed(2));
+            setOriginalAmount(Number(backedProject.donation_amount).toFixed(2));
         }
     }, [backedProject]);
 
     useEffect(() => {
         let errors = {}
+        if (donationAmount < 0) errors.negative = 'Cannot set donation amount to less than 0'
         if (donationAmount === 0) errors.donationAmount = 'BE CAREFUL, SETTING DONATION AMOUNT TO 0 HERE WILL DELETE YOUR BACKING'
         setErrors({ ...errors })
     }, [donationAmount])
 
-    useEffect(() => {
-        dispatch(fetchBackedProjects())
-    }, [dispatch])
 
     const handleConfirmChange = async () => {
         const difference = donationAmount - originalAmount;
@@ -39,16 +41,15 @@ export default function ChangeBacking() {
             } catch {
                 window.alert('Something went wrong')
             }
+        } else {
+            try {
+                dispatch(updateBackedProject(backedProjectId, (+backedProject.donation_amount + +difference).toFixed(2)));
+                dispatch(updateProject(backedProject.project_id, { amount: backedProject.project.amount + difference }, backedProject.project.user_id));
+            } catch {
+                window.alert('Something went wrong');
+            }
         }
-
-        try {
-            dispatch(updateBackedProject(backedProjectId, difference));
-            dispatch(updateProject(backedProject.project_id, { amount: backedProject.project.amount + difference }, userId));
-        } catch {
-            window.alert('Something went wrong');
-        }
-
-        navigate(-1);
+        navigate(`/user/${userId}/backed-projects`);
     };
 
     return (
@@ -58,7 +59,7 @@ export default function ChangeBacking() {
             </h2>
             <h1>Change your donation amount</h1>
             <form onSubmit={(e) => e.preventDefault()}>
-                {Object.keys(errors).length > 0 && <h2 className='error-message'> {errors.donationAmount} </h2>}
+                {Object.keys(errors).length > 0 && <h2 className='error-message'> {Object.values(errors)[0]} </h2>}
                 <label>Donation Amount</label>
                 <input
                     type="number"
@@ -68,7 +69,7 @@ export default function ChangeBacking() {
                 />
             </form>
             <div className="button-group">
-                <button className="confirm-button" onClick={handleConfirmChange}>
+                <button className="confirm-button" disabled={errors.negative} onClick={handleConfirmChange}>
                     Confirm Change
                 </button>
                 <button className="cancel-button" onClick={() => navigate(-1)}>
