@@ -10,6 +10,7 @@ def check_reward_ownership(func):
     def wrapper(*args, **kwargs):
         project_id = kwargs.get('id')
         user_id = request.headers.get('user_id')
+        print(f"Project ID: {project_id}, User ID: {user_id}")
         if user_id == None:
             user_id = request.cookies.get('user_id')
         headers_project_id = request.headers.get('project_id')
@@ -63,10 +64,10 @@ def update_reward(id):
 
     return jsonify(reward.to_dict())
 
-@reward_routes.route('/<int:id>', methods=['Delete'])
+@reward_routes.route('/<int:id>', methods=['DELETE'])
 @check_reward_ownership
 def delete_reward(id):
-    reward = Reward.query.get(id)
+    reward = Reward.query.get_or_404(id)
     db.session.delete(reward)
     db.session.commit()
     return jsonify({'message': 'Reward removed'}), 200

@@ -18,8 +18,8 @@ const CreateReward = () => {
     useEffect(() => {
         const errors = {}
 
-        if(pledge < 0) errors.pledge = 'Pledge is required'
-        if(name.length < 0) errors.name = 'Name is required'
+        if(pledge < 1) errors.pledge = 'Pledge is required'
+        if(name.length < 2) errors.name = 'Name is required'
         if(content.length < 30) errors.name = 'Content must be at least 30 characters'
 
         setErrors(errors)

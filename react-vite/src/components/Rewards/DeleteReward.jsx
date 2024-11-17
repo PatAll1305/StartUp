@@ -2,14 +2,14 @@ import { useModal } from "../../context/Modal";
 import { deleteRewardThunk } from "../../store/rewards";
 import { useDispatch } from "react-redux";
 
-const ConfirmDeleteReward = ({ rewardId }) => {
+const ConfirmDeleteReward = ({ rewardId, userId, projectId }) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal()
 
-    const deleteReview = () => {
-        dispatch(deleteRewardThunk( rewardId.rewards ))
+    const deleteReward = async () => {
+        await dispatch(deleteRewardThunk( rewardId, userId, projectId ))
         closeModal()
-        console.log(rewardId.rewards)
+        console.log(projectId)
     }
 
     return (
@@ -19,7 +19,7 @@ const ConfirmDeleteReward = ({ rewardId }) => {
                 <p>Are you sure you want to remove this reward?</p>
             </div>
             <div>
-                <button onClick={deleteReview}>yes (Delete Reward)</button>
+                <button onClick={deleteReward}>yes (Delete Reward)</button>
                 <button onClick={closeModal}>No (Keep Reward)</button>
             </div>
         </div>

@@ -14,13 +14,12 @@ const Rewards = () => {
     const rewards = useSelector((state) =>
         Object.values(state.rewards).filter((reward) => reward.project_id === Number(projectId)))
     const user = useSelector((state) => (state.session.user))
-    const project = useSelector((state) => state.projects[+projectId]?.user_id)
-    const currentOwner = user && user.id === project;
+    const project = useSelector((state) => (state.projects[projectId]))
+    const currentOwner = user && user.id === project.user_id;
     // const thisProject = useSelector((state) => state.projects[+projectId]?.id)
     const navigate = useNavigate()
-    const thisReward = useSelector(state => (state.projects[projectId]))
-    // console.log(thisProject)
-
+    // const thisReward = useSelector(state => (state.projects[projectId]))
+    console.log(currentOwner)
     useEffect(() => {
         dispatch(getRewardsThunk())
         dispatch(fetchOneProject(+projectId))
@@ -44,13 +43,15 @@ const Rewards = () => {
                             <button
                             className="delete-reward"
                             ><OpenModalButton
-                            modalComponent={<ConfirmDeleteReward rewardId={thisReward} />} itemText={'Delete'} />Delete</button>
+                            modalComponent={<ConfirmDeleteReward rewardId={reward.id} userId={user[1]} projectId={projectId}/>} itemText={'Delete'} />Delete</button>
                         </div>
                         </>
                     )}
                 </div>
+
             ))}
-            <div
+            {!currentOwner && (
+                <div
                 className="rewards-content"
                 style={{
                     display: 'flex',
@@ -60,28 +61,36 @@ const Rewards = () => {
                 <input type="number" placeholder="Choose your donation amount"/>
                 <button>Donate</button>
             </div>
-
+            )}
                 </>
         ) : (
             <>
                 <h1>No rewards available</h1>
+            {!currentOwner && (
                     <div
-                className="rewards-content"
-                style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
-                }}>
-                <input type="number" placeholder="Choose your donation amount"/>
-                    <button>Donate</button>
-                    </div>
+                    className="rewards-content"
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                    }}>
+            <input type="number" placeholder="Choose your donation amount"/>
+                <button>Donate</button>
+                </div>
+            )}
             </>
         )}
-        <button style={{
-            display: 'flex',
-            justifySelf: 'center',
-            alignItems: 'center',
-            height: '60px'}}onClick={() => navigate(`/projects/${projectId}/rewards/create`)}>Create a new reward!</button>
+        {currentOwner && (
+            <button
+            style={{
+                display: 'flex',
+                justifySelf: 'center',
+                alignItems: 'center',
+                height: '60px'
+            }}
+            onClick={() => navigate(`/projects/${projectId}/rewards/create`)}>Create a new reward!
+            </button>
+        )}
         </div>
     )
 }
