@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getRewardsThunk } from "../../store/rewards";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import './Rewards.css'
 import { fetchOneProject } from "../../store/projects";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +17,7 @@ const Rewards = () => {
     const project = useSelector((state) => (state.projects[projectId]))
     const currentOwner = user && user.id === project.user_id;
     const navigate = useNavigate()
+    const location = useLocation()
 
     useEffect(() => {
         dispatch(getRewardsThunk())
@@ -25,7 +26,9 @@ const Rewards = () => {
 
     return (
         <div className="each-reward">
-             <button id='back-button' onClick={() => { navigate(`/projects/${project.id}`) }}> {`< Back`}</button>
+            {(location.pathname === `/projects/${projectId}/rewards` || location.pathname === `/projects/${projectId}/rewards/`) && (
+                <button id='back-button' onClick={() => { navigate(`/projects/${project.id}`) }}> {`< Back`}</button>
+            )}
             {rewards.length > 0 ? (
                 <>
                 {rewards.map((reward) => (
@@ -37,7 +40,10 @@ const Rewards = () => {
                         <>
                         <h3>Current Pledge: ${reward.pledge.toFixed(2)}</h3>
                         <div className="reward-edit-delete">
-                            <button className="update-reward" onClick={() => {navigate(`/projects/${projectId}/rewards/${reward.id}/edit`)}}>Edit Reward</button>
+                            <button
+                                className="update-reward"
+                                onClick={() => {navigate(`/projects/${projectId}/rewards/${reward.id}/edit`)}}>Edit Reward</button
+                            >
                             <button
                             className="delete-reward"
                             ><OpenModalButton
