@@ -36,7 +36,9 @@ const CreateReward = () => {
     }
 
     return (
+
         <div className="create-reward">
+        <button id='back-button' style={{width: 'fit-content'}} onClick={() => { navigate(-1) }}> {`< Back`}</button>
             <h1> Create a new Reward </h1>
             <form onSubmit={handleSubmit} className="create-reward-form">
                 <label className="name">
