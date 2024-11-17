@@ -7,9 +7,9 @@ const ConfirmDeleteReward = ({ rewardId }) => {
     const { closeModal } = useModal()
 
     const deleteReview = () => {
-        dispatch(deleteRewardThunk( rewardId ))
+        dispatch(deleteRewardThunk( rewardId.rewards ))
         closeModal()
-        console.log(rewardId)
+        console.log(rewardId.rewards)
     }
 
     return (

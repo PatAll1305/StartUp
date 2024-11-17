@@ -16,10 +16,10 @@ const Rewards = () => {
     const user = useSelector((state) => (state.session.user))
     const project = useSelector((state) => state.projects[+projectId]?.user_id)
     const currentOwner = user && user.id === project;
-    const thisProject = useSelector((state) => state.projects[+projectId]?.id)
+    // const thisProject = useSelector((state) => state.projects[+projectId]?.id)
     const navigate = useNavigate()
-    const thisReward = useSelector(state => Object.values(state.rewards[projectId]))
-    console.log(thisReward)
+    const thisReward = useSelector(state => (state.projects[projectId]))
+    // console.log(thisProject)
 
     useEffect(() => {
         dispatch(getRewardsThunk())
