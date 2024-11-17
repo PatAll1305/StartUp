@@ -37,6 +37,22 @@ function LoginFormPage() {
     }
   };
 
+  const demoSubmit = async (e) => {
+    e.preventDefault();
+    const serverResponse = await dispatch(
+      thunkLogin({ 
+        email: "demo@aa.io", 
+        password: "password" 
+      })
+    );
+
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <>
       <ul className="navlist-login-page">
@@ -72,15 +88,15 @@ function LoginFormPage() {
           />
         </label>
         {errors.password && <p className="error-message">{errors.password}</p>}
-        {/* <button type="submit" className="login-submit-button">
-          Log In
-        </button> */}
         <LogInButton
             type="submit" 
             className="login-submit-button"
             isAuthenticated={!!sessionUser}
             onLogout={handleLogout}
         />
+      <div className='demo-user'>
+          <a onClick={(e) => demoSubmit(e)}>Demo User</a>
+      </div>
       </form>
       <div className="signup-section">
         <hr className="divider" />

@@ -134,6 +134,20 @@ a {
   color: #6B8E23;
 }
 
+.demo-user {
+  margin-top: 40px;
+}
+
+.demo-user a {
+  color: #46841c;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.demo-user a:hover {
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
   .navlist-login-page {
     padding: 15px;
