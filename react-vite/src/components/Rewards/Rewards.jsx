@@ -3,29 +3,91 @@ import { useSelector, useDispatch } from "react-redux";
 import { getRewardsThunk } from "../../store/rewards";
 import { useParams } from "react-router-dom";
 import './Rewards.css'
-// import { useNavigate } from "react-router-dom";
+import { fetchOneProject } from "../../store/projects";
+import { useNavigate } from "react-router-dom";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import ConfirmDeleteReward from "./DeleteReward";
 
 const Rewards = () => {
     const { projectId } = useParams()
     const dispatch = useDispatch();
     const rewards = useSelector((state) =>
         Object.values(state.rewards).filter((reward) => reward.project_id === Number(projectId)))
-    
+    const user = useSelector((state) => (state.session.user))
+    const project = useSelector((state) => (state.projects[projectId]))
+    const currentOwner = user && user.id === project.user_id;
+    const navigate = useNavigate()
+
     useEffect(() => {
         dispatch(getRewardsThunk())
-    }, [dispatch])
+        dispatch(fetchOneProject(+projectId))
+    }, [dispatch, projectId])
 
     return (
         <div className="each-reward">
+             <button id='back-button' onClick={() => { navigate(`/projects/${project.id}`) }}> {`< Back`}</button>
             {rewards.length > 0 ? (
-                rewards.map((reward) => (
+                <>
+                {rewards.map((reward) => (
                 <div className="rewards-content" key={reward.id}>
+                    <h1 className="rewards-name">{reward.name}</h1>
                     <h4 className="rewards-desc">{reward.content}</h4>
-                    <button>Pledge: ${reward.pledge}</button>
+                    {!currentOwner && <button>Pledge: ${reward.pledge.toFixed(2)}</button>}
+                    {currentOwner && (
+                        <>
+                        <h3>Current Pledge: ${reward.pledge.toFixed(2)}</h3>
+                        <div className="reward-edit-delete">
+                            <button className="update-reward" onClick={() => {navigate(`/projects/${projectId}/rewards/${reward.id}/edit`)}}>Edit Reward</button>
+                            <button
+                            className="delete-reward"
+                            ><OpenModalButton
+                            modalComponent={<ConfirmDeleteReward rewardId={reward.id} userId={user[1]} projectId={projectId}/>} itemText={'Delete'} />Delete</button>
+                        </div>
+                        </>
+                    )}
                 </div>
-            ))
+
+            ))}
+            {!currentOwner && (
+                <div
+                className="rewards-content"
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                }}>
+                <input type="number" placeholder="Choose your donation amount"/>
+                <button>Donate</button>
+            </div>
+            )}
+                </>
         ) : (
-            <h1>No rewards available</h1>
+            <>
+                <h1>No rewards available</h1>
+            {!currentOwner && (
+                    <div
+                    className="rewards-content"
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                    }}>
+            <input type="number" placeholder="Choose your donation amount"/>
+                <button>Donate</button>
+                </div>
+            )}
+            </>
+        )}
+        {currentOwner && (
+            <button
+            style={{
+                display: 'flex',
+                justifySelf: 'center',
+                alignItems: 'center',
+                height: '60px'
+            }}
+            onClick={() => navigate(`/projects/${projectId}/rewards/create`)}>Create a new reward!
+            </button>
         )}
         </div>
     )

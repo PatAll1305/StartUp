@@ -4,7 +4,11 @@ import { fetchOneProject } from '../../store/projects';
 import { useParams, useNavigate } from 'react-router-dom';
 import { DeleteProjectModal } from '../DeleteModals/index';
 import OpenModalButton from '../OpenModalButton/OpenModalButton.jsx';
+import { ProjectsByCategory } from './index.js';
 import './Projects.css';
+import { getCategoriesThunk } from '../../store/categories.js';
+import { getRewardsThunk } from '../../store/rewards.js';
+import Rewards from '../Rewards/Rewards.jsx';
 
 export default function ProjectsById() {
     const { projectId } = useParams();
@@ -13,9 +17,13 @@ export default function ProjectsById() {
 
     const project = useSelector(state => state.projects[+projectId]);
     const user = useSelector(state => state.session.user);
+    const category = useSelector(state => state.categories[project?.category_id]);
+    const rewards = useSelector((state) => (Object.values(state.rewards).filter(reward => reward.project_id === project.id)));
 
     useEffect(() => {
         dispatch(fetchOneProject(+projectId));
+        dispatch(getCategoriesThunk())
+        dispatch(getRewardsThunk())
     }, [dispatch, projectId]);
 
     if (!project) return <h1 className='loading'>Loading...</h1>;
@@ -24,8 +32,7 @@ export default function ProjectsById() {
 
     return (
         <div className="project-page">
-            {/* TODO Add category tag after Categories are created */}
-            {/* <p className="project-category">Category: {project.category_id}</p> */}
+            <button id='back-button' style={{width: 'fit-content'}} onClick={() => { navigate(-1) }}> {`< Back`}</button>
             <div className="project-header">
                 <h1>{project.title}</h1>
                 <div className="project-info">
@@ -56,6 +63,7 @@ export default function ProjectsById() {
                             className='delete-project'
                         />
                         <button className='update-project' onClick={() => { navigate(`/projects/${projectId}/update`) }}> Update Project</button>
+                        <button className='update-rewards' onClick={() => { navigate(`/projects/${projectId}/rewards`) }}> Update Rewards</button>
                     </div>
                 )
                     :
@@ -66,6 +74,10 @@ export default function ProjectsById() {
                         Back this Project
                     </button>)}
             </div>
+            {rewards && <h2>Rewards for this Project:</h2>}
+            <Rewards />
+            <h3>Other {category?.title} Projects</h3>
+            <ProjectsByCategory categoryId={project.category_id} />
         </div>
     );
 }

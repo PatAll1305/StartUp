@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProjects } from '../../store/projects';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './Projects.css';
 
+const GetCategoryId = () => {
+    let { categoryId } = useParams()
+    return categoryId
+}
+
 export default function ProjectsByCategory({ categoryId }) {
+    if (!categoryId) categoryId = GetCategoryId()
     const dispatch = useDispatch();
     const projects = useSelector((state) => Object.values(state.projects));
     const navigate = useNavigate();

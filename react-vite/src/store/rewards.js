@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_REWARDS = 'rewards/GET'
 const ADD_REWARDS = 'rewards/ADD'
+const UPDATE_REWARD = 'rewards/UPDATE'
 const DELETE_REWARDS = 'rewards/DELETE'
 
 const getRewards = ( rewards ) => ({
@@ -12,6 +13,13 @@ const getRewards = ( rewards ) => ({
 const addReward = ( reward ) => {
     return {
         type: ADD_REWARDS,
+        reward
+    }
+}
+
+const updateReward = ( reward ) => {
+    return {
+        type: UPDATE_REWARD,
         reward
     }
 }
@@ -38,13 +46,16 @@ export const getRewardsThunk = () => async ( dispatch ) => {
     }
 }
 
-export const addRewardThunk = ( payload ) => async ( dispatch ) => {
+export const addRewardThunk = ( payload, userId, projectId ) => async ( dispatch ) => {
     try {
-        const { project_id, pledge, name, content } = payload
-
         const res = await csrfFetch('/api/rewards', {
             method: 'POST',
-            body: JSON.stringify({ project_id, pledge, name, content })
+            headers: {
+                'Content-Type': 'application/json',
+                'userId': userId,
+                'projectId': projectId
+            },
+            body: JSON.stringify(payload)
         })
         const newReward = await res.json()
         dispatch(addReward(newReward))
@@ -54,15 +65,35 @@ export const addRewardThunk = ( payload ) => async ( dispatch ) => {
     }
 }
 
-export const deleteRewardThunk = ( rewardId ) => async ( dispatch ) => {
-    try {
-        await csrfFetch(`/api/rewards/${rewardId}`, {
-            method: 'DELETE'
-        })
+export const updateRewardThunk = ( payload, userId, projectId, rewardId ) => async ( dispatch ) => {
+    const res = await csrfFetch(`/api/rewards/${rewardId}`, {
+        method: 'PUT',
+        body: JSON.stringify( payload ),
+        headers: {
+            'userId': userId,
+            'projectId': projectId
+         }
+    })
+    const editReward = await res.json()
+    dispatch(updateReward(editReward))
+    return editReward
+}
+
+export const deleteRewardThunk = ( rewardId, userId, projectId ) => async ( dispatch ) => {
+    const res = await csrfFetch(`/api/rewards/${rewardId}`, {
+        method: 'DELETE',
+        headers: {
+            'userId': userId,
+            'projectId': projectId
+        }
+    })
+    if(res.ok) {
+        const deletedReward = await res.json()
         dispatch(deleteReward(rewardId))
-        return rewardId
-    } catch(error) {
-        console.error('Failed to delete reward:', error)
+        return deletedReward
+    } else {
+        const error = await res.json()
+        return error
     }
 }
 
@@ -79,6 +110,13 @@ export default function rewardReducer( state = {}, action ) {
             return {
                 ...state,
                 [action.reward.id]: action.reward
+            }
+        }
+        case UPDATE_REWARD: {
+            const updatedReward = action.reward;
+            return {
+                ...state,
+                [updatedReward.id]: updateReward
             }
         }
         case DELETE_REWARDS: {

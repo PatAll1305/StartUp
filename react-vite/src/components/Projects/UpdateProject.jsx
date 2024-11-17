@@ -18,13 +18,13 @@ export default function UpdateProject() {
     const [mediaUrl, setMediaUrl] = useState("");
     const [deadline, setDeadline] = useState("");
     const [errors, setErrors] = useState("");
+    const [currGoal, setCurrGoal] = useState(goal)
 
     useEffect(() => {
         if (!user) {
             navigate("/login");
             return;
         }
-
         dispatch(fetchOneProject(+projectId));
     }, [dispatch, projectId, user, navigate]);
 
@@ -37,17 +37,17 @@ export default function UpdateProject() {
             setMediaUrl(project.media_url);
             setDeadline(new Date(project.deadline).toISOString().split('T')[0]);
         }
+        setCurrGoal(goal)
     }, [project]);
 
     useEffect(() => {
         const validationErrors = {};
         if (title.length < 10) validationErrors.title = "Title must contain at least 10 characters";
         if (description.length < 30) validationErrors.description = "Description must contain at least 30 characters";
-        if (goal < 1000 || goal > 100000) validationErrors.goal = "Goal cannot be lower than $1000 or greater than $1 Million";
-        if (!location.length) validationErrors.location = "Location must be filled in";
+        if (currGoal > goal || goal > 100000000) validationErrors.goal = "Goal cannot be lower than previous goal or greater than $1 Million";
+        if (!location.length || location.split(', ').length !== 2 || location.split(', ')[1].length !== 2) validationErrors.location = "Location should be in 'City, State' format"
         if (!mediaUrl.includes('http://') && !mediaUrl.includes('https://')) validationErrors.mediaUrl = "Media URL must start with 'http' or 'https'";
         if (Date.parse(deadline) <= new Date()) validationErrors.deadline = "Deadline cannot be in the past";
-
         setErrors(validationErrors);
     }, [title, description, goal, location, mediaUrl, deadline]);
 
@@ -78,7 +78,7 @@ export default function UpdateProject() {
             {user && project.user_id === user.id ? (
                 <div className="create-project-container">
                     <h1>Update {title}</h1>
-                    <form onSubmit={handleSubmit} className="create-project-form">
+                    <form onSubmit={handleSubmit} className="update-project-form">
                         {Object.keys(errors).length > 0 && (
                             <p className="error-message">{Object.values(errors)[0]}</p>
                         )}
@@ -89,7 +89,7 @@ export default function UpdateProject() {
 
                         <label className={"description" + errors.description ? "-error" : ''}>
                             Description
-                            <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
+                            <input className='description-update' type='text' value={description} onChange={(e) => setDescription(e.target.value)} required />
                         </label>
 
                         <label className={"goal" + errors.goal ? "-error" : ''}>
@@ -106,18 +106,9 @@ export default function UpdateProject() {
                             Media URL
                             <input type="url" value={mediaUrl} onChange={(e) => setMediaUrl(e.target.value)} required />
                         </label>
-
-                        <label className={"deadline" + errors.deadline ? "-error" : ''}>
-                            Deadline
-                            <input
-                                type="date"
-                                value={deadline}
-                                onChange={(e) => setDeadline(e.target.value)}
-                                required
-                            />
-                        </label>
-
                         <button type="submit">Update Project</button>
+                        <button onClick={() => { navigate(`/projects/${projectId}/rewards`) }}> Update Rewards</button>
+                        <button className="cancel-update" onClick={() => { navigate(`/projects/${projectId}`) }} >Cancel</button>
                     </form>
                 </div>
             ) : (

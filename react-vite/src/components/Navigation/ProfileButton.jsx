@@ -2,15 +2,17 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { FaUserCircle, FaBars } from 'react-icons/fa';
 import { thunkLogout } from "../../store/session";
+import { useNavigate } from 'react-router-dom';
 import './ProfileButton.css'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
   const toggleMenu = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     setShowMenu(!showMenu);
   };
 
@@ -45,35 +47,34 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <div  onClick={toggleMenu} className='nav-bar-dropdown'>
+    <div onClick={toggleMenu} className='nav-bar-dropdown'>
       <FaBars className='hamburger' />
       {user ? (
         <div className='username-profile'>
           <span>{user.username[0].toUpperCase()}</span>
-    </div>
+        </div>
       ) :
         <FaUserCircle />
 
       }
       <ul className={ulClassName} ref={ulRef}>
-      {user ? (
-        <>
-          <li onClick={handleOnClick}>Your Projects</li>
-          {/* <div className='divider-horizontal'></div> */}
-          <li>Recommended</li>
-          <li onClick={handleOnClick}>Following</li>
-          <div className='divider-horizontal'></div>
-          <li onClick={handleOnClick}>Profile</li>
-          <li>Settings</li>
-          <li onClick={handleOnClick}>Messages</li>
-          <div className='divider-horizontal'></div>
-          <spam>                              </spam>
-          <div className='divider-horizontal'></div>
-          <div>
-            <button onClick={logout}>Logout</button>
-          </div>
-        </>
-      ) : null}
+        {user ? (
+          <>
+            <li onClick={handleOnClick}>Your Projects</li>
+            <li onClick={handleOnClick}>Recommended</li>
+            <li onClick={handleOnClick}>Following</li>
+            <div className='divider-horizontal'></div>
+            <li onClick={handleOnClick}>Profile</li>
+            <li onClick={() => { navigate(`/user/${user.id}/backed-projects`) }}>Backed Projects</li>
+            <li onClick={handleOnClick}>Messages</li>
+            <div className='divider-horizontal'></div>
+            <spam>                              </spam>
+            <div className='divider-horizontal'></div>
+            <div>
+              <button onClick={logout}>Logout</button>
+            </div>
+          </>
+        ) : null}
       </ul>
     </div>
   );
