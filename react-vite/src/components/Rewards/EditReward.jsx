@@ -13,7 +13,6 @@ const EditReward = () => {
     const user = useSelector((state) => state.session.user)
     const reward = useSelector((state) =>
         Object.values(state.rewards).filter((reward) => reward.id === Number(rewardId)))
-    console.log(reward)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -44,7 +43,6 @@ const EditReward = () => {
 
     useEffect(() => {
         if(reward[0]) {
-            console.log('HERE')
             setPledge(reward[0]?.pledge)
             setName(reward[0]?.name)
             setContent(reward[0]?.content)
