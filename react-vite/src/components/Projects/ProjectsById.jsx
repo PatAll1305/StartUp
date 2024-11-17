@@ -19,7 +19,7 @@ export default function ProjectsById() {
     const user = useSelector(state => state.session.user);
     const category = useSelector(state => state.categories[project?.category_id]);
     const rewards = useSelector((state) => (Object.values(state.rewards).filter(reward => reward.project_id === project.id)));
-    
+
     useEffect(() => {
         dispatch(fetchOneProject(+projectId));
         dispatch(getCategoriesThunk())
@@ -32,7 +32,7 @@ export default function ProjectsById() {
 
     return (
         <div className="project-page">
-            <h2 id='back-button' onClick={() => { navigate(-1) }}> {`< Back`}</h2>
+            <button id='back-button' style={{width: 'fit-content'}} onClick={() => { navigate(-1) }}> {`< Back`}</button>
             <div className="project-header">
                 <h1>{project.title}</h1>
                 <div className="project-info">
