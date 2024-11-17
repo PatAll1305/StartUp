@@ -30,3 +30,24 @@ button:hover {
 .rewards-desc {
     text-align: start;
 }
+.rewards-name {
+    color: black;
+}
+.reward-edit-delete {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+.delete-reward {
+    background-color: red;
+    &:hover {
+        background-color: darkred;
+    }
+}
+#back-button {
+    background-color: olivedrab;
+    &:hover {
+        cursor: pointer;
+    }
+}

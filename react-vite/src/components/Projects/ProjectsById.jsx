@@ -19,7 +19,7 @@ export default function ProjectsById() {
     const user = useSelector(state => state.session.user);
     const category = useSelector(state => state.categories[project?.category_id]);
     const rewards = useSelector((state) => (Object.values(state.rewards).filter(reward => reward.project_id === project.id)));
-    console.log(rewards)
+    
     useEffect(() => {
         dispatch(fetchOneProject(+projectId));
         dispatch(getCategoriesThunk())

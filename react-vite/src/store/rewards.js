@@ -65,26 +65,35 @@ export const addRewardThunk = ( payload, userId, projectId ) => async ( dispatch
     }
 }
 
-export const updateRewardThunk = ( rewardId, payload, userId ) => async ( dispatch ) => {
+export const updateRewardThunk = ( payload, userId, projectId, rewardId ) => async ( dispatch ) => {
     const res = await csrfFetch(`/api/rewards/${rewardId}`, {
         method: 'PUT',
         body: JSON.stringify( payload ),
-        headers: { 'userId': userId }
+        headers: {
+            'userId': userId,
+            'projectId': projectId
+         }
     })
     const editReward = await res.json()
     dispatch(updateReward(editReward))
     return editReward
 }
 
-export const deleteRewardThunk = ( rewardId ) => async ( dispatch ) => {
-    try {
-        await csrfFetch(`/api/rewards/${rewardId}`, {
-            method: 'DELETE'
-        })
+export const deleteRewardThunk = ( rewardId, userId, projectId ) => async ( dispatch ) => {
+    const res = await csrfFetch(`/api/rewards/${rewardId}`, {
+        method: 'DELETE',
+        headers: {
+            'userId': userId,
+            'projectId': projectId
+        }
+    })
+    if(res.ok) {
+        const deletedReward = await res.json()
         dispatch(deleteReward(rewardId))
-        return rewardId
-    } catch(error) {
-        console.error('Failed to delete reward:', error)
+        return deletedReward
+    } else {
+        const error = await res.json()
+        return error
     }
 }
 
