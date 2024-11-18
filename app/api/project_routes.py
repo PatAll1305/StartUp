@@ -6,9 +6,6 @@ from flask_login import login_required
 
 project_routes = Blueprint('projects', __name__)
 
-def error_response(message, status_code=400):
-  return jsonify({"error": message}), status_code
-
 def check_project_ownership(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -99,14 +96,16 @@ def delete_project(id):
 def back_project(id):
     data = request.get_json()
     if not data:
-        return error_response("Invalid request.", 400)
+        return jsonify("Invalid request."), 400
 
     project_id = id
     user_id = data.get("user_id")
     reward_id = data.get("reward_id")
     donation_amount = data.get("donation_amount")
-    if not user_id or not donation_amount:
-        return error_response("'user_id', and 'donation_amount' are both required.", 400)
+    if not user_id :
+        return jsonify("'user_id' is required."), 400
+    if not reward_id and not donation_amount:
+        return jsonify("'reward_id' or 'donation_amount' is required."), 400
 
     reward = Reward.query.get_or_404(reward_id).first()
     if not reward:
@@ -119,7 +118,7 @@ def back_project(id):
         backed_project=BackedProject(
             user_id=user_id,
             project_id=project_id,
-            donation_amount=donation_amount,
+            donation_amount=reward.pledge,
             reward_id=reward_id
         )
 
