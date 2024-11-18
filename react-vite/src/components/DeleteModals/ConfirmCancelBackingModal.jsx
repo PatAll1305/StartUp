@@ -13,7 +13,7 @@ export default function ConfirmCancelBackingModal({ backing }) {
     const handleConfirmCancel = () => {
         try {
             dispatch(deleteBacking(backing.id));
-            dispatch(updateProject(backing.project.id, { amount: backing.project.amount - backing.donation_amount }))
+            dispatch(updateProject(backing.project.id, { amount: (backing.project.amount - backing.donation_amount).toFixed(2) }, backing.project.user_id))
             closeModal();
             window.location.reload()
         } catch (error) {

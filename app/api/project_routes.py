@@ -1,9 +1,13 @@
 from flask import Blueprint, request, jsonify
-from ..models import db, Project
+from ..models import db, Project, Reward, BackedProject
 from datetime import datetime
 from functools import wraps
+from flask_login import login_required
 
 project_routes = Blueprint('projects', __name__)
+
+def error_response(message, status_code=400):
+  return jsonify({"error": message}), status_code
 
 def check_project_ownership(func):
     @wraps(func)
@@ -62,6 +66,7 @@ def update_project(id):
     project = Project.query.get_or_404(id)
     data = request.get_json()
 
+    print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++', data.get('amount'))
     project.body = data.get('body', project.body)
     project.location = data.get('location', project.location)
     project.title = data.get('title', project.title)
@@ -89,3 +94,37 @@ def delete_project(id):
     db.session.delete(project)
     db.session.commit()
     return jsonify({"message": "Project deleted"}), 204
+
+@project_routes.route('/<int:id>/back', methods=['POST'])
+@login_required
+def back_project(id):
+    data = request.get_json()
+    if not data:
+        return error_response("Invalid request.", 400)
+
+    project_id = id
+    user_id = data.get("user_id")
+    reward_id = data.get("reward_id")
+    donation_amount = data.get("donation_amount")
+    if not user_id or not donation_amount:
+        return error_response("'user_id', and 'donation_amount' are both required.", 400)
+
+    reward = Reward.query.get_or_404(reward_id).first()
+    if not reward:
+        backed_project = BackedProject(
+            user_id=user_id,
+            project_id=project_id,
+            donation_amount=donation_amount
+        )
+    else :
+        backed_project=BackedProject(
+            user_id=user_id,
+            project_id=project_id,
+            donation_amount=donation_amount,
+            reward_id=reward_id
+        )
+
+    db.session.add(backed_project)
+    db.session.commit()
+
+    return jsonify(backed_project.to_dict()), 201

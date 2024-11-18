@@ -3,7 +3,7 @@ from sqlalchemy.sql import text
 
 def seed_backed_projects():
   backed_projects = [
-    BackedProject(user_id=1, project_id=1, reward_id=2, donation_amount=8008.15),
+    BackedProject(user_id=1, project_id=45, reward_id=2, donation_amount=8008.15),
     BackedProject(user_id=2, project_id=1, reward_id=1, donation_amount=1200.00),
     BackedProject(user_id=3, project_id=2, reward_id=3, donation_amount=100.00),
     BackedProject(user_id=4, project_id=3, reward_id=20, donation_amount=50.00),
@@ -12,8 +12,8 @@ def seed_backed_projects():
     BackedProject(user_id=4, project_id=6, reward_id=18, donation_amount=9999.99),
     BackedProject(user_id=5, project_id=7, reward_id=6, donation_amount=202.02),
     BackedProject(user_id=2, project_id=8, reward_id=7, donation_amount=909.09),
-    BackedProject(user_id=1, project_id=9, reward_id=8, donation_amount=8008.15),
-    BackedProject(user_id=1, project_id=10, reward_id=15, donation_amount=8008.15),
+    BackedProject(user_id=1, project_id=27, reward_id=8, donation_amount=8008.15),
+    BackedProject(user_id=1, project_id=28, reward_id=15, donation_amount=8008.15),
     BackedProject(user_id=2, project_id=11, reward_id=9, donation_amount=10101.01),
     BackedProject(user_id=3, project_id=12, reward_id=10, donation_amount=8938.00),
     BackedProject(user_id=4, project_id=13, reward_id=25, donation_amount=33.22),
