@@ -18,7 +18,6 @@ const Rewards = () => {
     const currentOwner = user && user.id === project.user_id;
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(projectId)
 
     useEffect(() => {
         dispatch(getRewardsThunk())

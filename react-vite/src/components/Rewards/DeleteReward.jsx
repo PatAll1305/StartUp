@@ -9,7 +9,6 @@ const ConfirmDeleteReward = ({ rewardId, userId, projectId }) => {
     const deleteReward = () => {
         dispatch(deleteRewardThunk(rewardId, userId, projectId))
         closeModal()
-        console.log(rewardId, userId, projectId)
     }
 
     return (
