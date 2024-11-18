@@ -45,7 +45,7 @@ const Rewards = () => {
                                         < ConfirmBackingModal
                                             project={project}
                                             reward={reward}
-                                            userId={user.id} />} />
+                                            userId={user?.id} />} />
                             }
                             {currentOwner && (
                                 <>
@@ -59,7 +59,7 @@ const Rewards = () => {
                                         <OpenModalButton
                                             className="delete-reward"
                                             buttonText='Delete'
-                                            modalComponent={<ConfirmDeleteReward rewardId={reward.id} userId={user.id} projectId={+projectId} />} itemText={'Delete'} />
+                                            modalComponent={<ConfirmDeleteReward rewardId={reward.id} userId={user?.id} projectId={+projectId} />} itemText={'Delete'} />
                                     </div>
                                 </>
                             )}
@@ -75,7 +75,7 @@ const Rewards = () => {
                                 alignItems: 'center'
                             }}>
                             <input type="number" onChange={(e) => { setDonationAmount(e.target.value) }} placeholder="Choose your donation amount" />
-                            <OpenModalButton buttonText={'Donate'} modalComponent={< ConfirmBackingModal project={project} donationAmount={donationAmount} userId={user.id} />} />
+                            <OpenModalButton buttonText={'Donate'} modalComponent={< ConfirmBackingModal project={project} donationAmount={donationAmount} userId={user?.id} />} />
                         </div>
                     )}
                 </>
@@ -91,7 +91,7 @@ const Rewards = () => {
                                 alignItems: 'center'
                             }}>
                             <input type="number" onChange={(e) => { setDonationAmount(e.target.value) }} placeholder="Choose your donation amount" />
-                            <OpenModalButton buttonText={'Donate'} modalComponent={< ConfirmBackingModal project={project} donationAmount={donationAmount} userId={user.id} />} />
+                            <OpenModalButton buttonText={'Donate'} modalComponent={< ConfirmBackingModal project={project} donationAmount={donationAmount} userId={user?.id} />} />
 
                         </div>
                     )}
