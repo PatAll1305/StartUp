@@ -18,7 +18,7 @@ export default function ProjectsById() {
     const project = useSelector(state => state.projects[+projectId]);
     const user = useSelector(state => state.session.user);
     const category = useSelector(state => state.categories[project?.category_id]);
-    const rewards = useSelector((state) => (Object.values(state.rewards).filter(reward => reward.project_id === project.id)));
+    const rewards = useSelector((state) => (Object.values(state.rewards).filter(reward => reward.project_id === project?.id)));
 
     useEffect(() => {
         dispatch(fetchOneProject(+projectId));
@@ -28,11 +28,11 @@ export default function ProjectsById() {
 
     if (!project) return <h1 className='loading'>Loading...</h1>;
 
-    const isOwner = user && user.id === project.user_id;
+    const isOwner = user && user?.id === project?.user_id;
 
     return (
         <div className="project-page">
-            <button id='back-button' style={{width: 'fit-content'}} onClick={() => { navigate(-1) }}> {`< Back`}</button>
+            <button id='back-button' style={{ width: 'fit-content' }} onClick={() => { navigate(-1) }}> {`< Back`}</button>
             <div className="project-header">
                 <h1>{project.title}</h1>
                 <div className="project-info">
@@ -40,18 +40,18 @@ export default function ProjectsById() {
                 </div>
             </div>
             <div className="project-content">
-                <img src={project.media_url} alt={project.title} className="project-image" />
+                <img src={project?.media_url} alt={project.title} className="project-image" />
                 <div className="project-details">
-                    <p>Location: {project.location}</p>
-                    <p>About the Project: {project.body}</p>
-                    <p>Backers: {/*TODO get backed_projects and add count for all with this project id */}</p>
-                    <p>Deadline: {new Date(project.deadline).toLocaleDateString()}</p>
+                    <p>Location: {project?.location}</p>
+                    <p>About the Project: {project?.body}</p>
+                    {/*<p>Backers: TODO get backed_projects and add count for all with this project id </p>*/}
+                    <p>Deadline: {new Date(project?.deadline).toLocaleDateString()}</p>
                 </div>
             </div>
             <div className="project-backing">
                 <div className="funding-info">
                     <div className='project-funding'>
-                        <p>${parseFloat(project.amount).toFixed(2)}</p>
+                        <p>${parseFloat(project?.amount).toFixed(2)}</p>
                         <p> Raised towards the ${parseFloat(project.goal).toFixed(2)} goal</p>
                     </div>
                 </div>
