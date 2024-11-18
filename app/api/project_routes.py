@@ -102,23 +102,27 @@ def back_project(id):
     user_id = data.get("user_id")
     reward_id = data.get("reward_id")
     donation_amount = data.get("donation_amount")
-    if not user_id :
+    reward = None
+    if user_id == None:
         return jsonify("'user_id' is required."), 400
-    if not reward_id and not donation_amount:
+
+    if reward_id == None and donation_amount == None:
         return jsonify("'reward_id' or 'donation_amount' is required."), 400
 
-    reward = Reward.query.get_or_404(reward_id).first()
-    if not reward:
+    if reward_id != None:
+        reward = Reward.query.get_or_404(reward_id)
+    if reward != None:
         backed_project = BackedProject(
             user_id=user_id,
             project_id=project_id,
-            donation_amount=donation_amount
+            donation_amount=reward.pledge,
+            reward_id=None
         )
     else :
         backed_project=BackedProject(
             user_id=user_id,
             project_id=project_id,
-            donation_amount=reward.pledge,
+            donation_amount=donation_amount,
             reward_id=reward_id
         )
 

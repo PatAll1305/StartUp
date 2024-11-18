@@ -50,6 +50,7 @@ def view_backed_projects():
                 "reward_id": bp.reward_id,
                 "user_id": bp.user_id,
                 "donation_amount": bp.donation_amount,
+                "created_at": bp.created_at,
                 "project": {
                     "id": project.id,
                     "title": project.title,

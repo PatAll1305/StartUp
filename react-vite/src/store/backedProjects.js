@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const SET_BACKED_PROJECTS = 'backedProjects/SET';
 const UPDATE_BACKED_PROJECT = 'backedProjects/UPDATE';
 const REMOVE_BACKING = 'backedProjects/REMOVE';
+const ADD_BACKING = 'backedProjects/ADD';
 
 const setBackedProjects = (backedProjects) => ({
     type: SET_BACKED_PROJECTS,
@@ -19,6 +20,11 @@ const removeBacking = (backingId) => ({
     backingId,
 });
 
+const addBacking = (backedProject) => ({
+    type: ADD_BACKING,
+    backedProject,
+});
+
 export const fetchBackedProjects = () => async (dispatch) => {
     const res = await csrfFetch('/api/backed_projects/my-backed-projects');
     if (res.ok) {
@@ -30,13 +36,9 @@ export const fetchBackedProjects = () => async (dispatch) => {
 };
 
 export const updateBackedProject = (id, donation_amount, reward_id) => async (dispatch) => {
-    let payload = {};
-    if (donation_amount) {
-        payload.donation_amount = donation_amount
-    }
-    if (reward_id) {
-        payload.reward_id = reward_id
-    }
+    const payload = {};
+    if (donation_amount) payload.donation_amount = donation_amount;
+    if (reward_id) payload.reward_id = reward_id;
 
     const res = await csrfFetch(`/api/backed_projects/${id}`, {
         method: 'PUT',
@@ -65,10 +67,31 @@ export const deleteBacking = (backingId) => async (dispatch) => {
     }
 };
 
+export const backProject = (payload, projectId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/projects/${projectId}/back`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+    });
+
+    if (response.ok) {
+        const backedProject = await response.json();
+        dispatch(addBacking(backedProject));
+        return backedProject;
+    } else {
+        throw new Error("Failed to back the project.");
+    }
+};
+
 export default function backedProjectsReducer(state = {}, action) {
     switch (action.type) {
-        case SET_BACKED_PROJECTS:
-            return { ...state, ...action.backedProjects };
+        case SET_BACKED_PROJECTS: {
+            const newState = {};
+            action.backedProjects.forEach((project) => {
+                newState[project.id] = project;
+            });
+            return { ...state, ...newState };
+        }
         case UPDATE_BACKED_PROJECT:
             return { ...state, [action.backedProject.id]: action.backedProject };
         case REMOVE_BACKING: {
@@ -76,6 +99,8 @@ export default function backedProjectsReducer(state = {}, action) {
             delete newState[action.backingId];
             return newState;
         }
+        case ADD_BACKING:
+            return { ...state, [action.backedProject.id]: action.backedProject };
         default:
             return state;
     }
