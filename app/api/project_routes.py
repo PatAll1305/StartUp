@@ -1,7 +1,8 @@
 from flask import Blueprint, request, jsonify
-from ..models import db, Project
+from ..models import db, Project, Reward, BackedProject
 from datetime import datetime
 from functools import wraps
+from flask_login import login_required
 
 project_routes = Blueprint('projects', __name__)
 
@@ -89,3 +90,39 @@ def delete_project(id):
     db.session.delete(project)
     db.session.commit()
     return jsonify({"message": "Project deleted"}), 204
+
+@project_routes.route('/<int:id>/back', methods=['POST'])
+@login_required
+def back_project(id):
+    data = request.get_json()
+    if not data:
+        return jsonify("Invalid request."), 400
+
+    project_id = id
+    user_id = data.get("user_id")
+    reward_id = data.get("reward_id")
+    donation_amount = data.get("donation_amount")
+    if not user_id :
+        return jsonify("'user_id' is required."), 400
+    if not reward_id and not donation_amount:
+        return jsonify("'reward_id' or 'donation_amount' is required."), 400
+
+    reward = Reward.query.get_or_404(reward_id).first()
+    if not reward:
+        backed_project = BackedProject(
+            user_id=user_id,
+            project_id=project_id,
+            donation_amount=donation_amount
+        )
+    else :
+        backed_project=BackedProject(
+            user_id=user_id,
+            project_id=project_id,
+            donation_amount=reward.pledge,
+            reward_id=reward_id
+        )
+
+    db.session.add(backed_project)
+    db.session.commit()
+
+    return jsonify(backed_project.to_dict()), 201

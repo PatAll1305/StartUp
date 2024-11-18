@@ -24,15 +24,15 @@ function Navigation() {
   const handleStartProjectClick = () => {
     // alert("This feature is coming soon!");
     if (sessionUser) {
-      navigate("/projects/create"); 
+      navigate("/projects/create");
     } else {
-      navigate("/login"); 
+      navigate("/login");
     }
   };
 
   return (
-      <nav>
-        <ul className="navlist-navigation">
+    <nav>
+      <ul className="navlist-navigation">
         <li>
           <NavLink className="navigation-startup" to="/">StartUp</NavLink>
         </li>
@@ -73,7 +73,7 @@ function Navigation() {
             </>
           )}
         </li>
-        
+
       </ul>
       <ul className="categories-navigation">
         {categories.map((category) => (

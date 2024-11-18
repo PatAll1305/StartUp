@@ -28,6 +28,7 @@ export default function ChangeBacking() {
         let errors = {}
         if (donationAmount < 0) errors.negative = 'Cannot set donation amount to less than 0'
         if (donationAmount === 0) errors.donationAmount = 'BE CAREFUL, SETTING DONATION AMOUNT TO 0 HERE WILL DELETE YOUR BACKING'
+        if (String(donationAmount).split(".")[1]?.length > 2) errors.penny = 'You cannot donate less than a penny'
         setErrors({ ...errors })
     }, [donationAmount])
 
@@ -69,7 +70,7 @@ export default function ChangeBacking() {
                 />
             </form>
             <div className="button-group">
-                <button className="confirm-button" disabled={errors.negative} onClick={handleConfirmChange}>
+                <button className="confirm-button" disabled={errors.negative || errors.penny} onClick={handleConfirmChange}>
                     Confirm Change
                 </button>
                 <button className="cancel-button" onClick={() => navigate(-1)}>
