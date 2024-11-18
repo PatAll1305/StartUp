@@ -27,7 +27,7 @@ const Rewards = () => {
     return (
         <div className="each-reward">
             {(location.pathname === `/projects/${projectId}/rewards` || location.pathname === `/projects/${projectId}/rewards/`) && (
-                <button id='back-button' onClick={() => { navigate(`/projects/${project.id}`) }}> {`< Back`}</button>
+                <button id='back-button' onClick={() => { navigate(-1) }}> {`< Back`}</button>
             )}
             {rewards.length > 0 ? (
                 <>
