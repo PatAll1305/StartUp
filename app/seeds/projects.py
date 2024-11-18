@@ -371,7 +371,7 @@ seed_project_data = [
     "goal": 5000.00,
     "amount": 2500.00,
     "location": "Dallas, TX",
-    "media_url": "https://example.com/media/virtual-workout.jpg",
+    "media_url": "https://www.switcherstudio.com/hs-fs/hubfs/fitness-%20ipad%20Live-1.png?width=380&height=266&name=fitness-%20ipad%20Live-1.png",
     "deadline": datetime.now() + timedelta(days=45),
     "category_id": 13
     },
@@ -383,7 +383,7 @@ seed_project_data = [
     "goal": 8000.00,
     "amount": 3600.00,
     "location": "Austin, TX",
-    "media_url": "https://example.com/media/pet-tracking.jpg",
+    "media_url": "https://m.media-amazon.com/images/I/71pgIXPqMsL._AC_UF1000,1000_QL80_.jpg",
     "deadline": datetime.now() + timedelta(days=60),
     "category_id": 13
     },
@@ -395,7 +395,7 @@ seed_project_data = [
     "goal": 3000.00,
     "amount": 1500.00,
     "location": "Sacramento, CA",
-    "media_url": "https://example.com/media/gardening.jpg",
+    "media_url": "https://miro.medium.com/v2/resize:fit:1400/1*f_KASgsnv8J0sIPKMJMqdA.jpeg",
     "deadline": datetime.now() + timedelta(days=35),
     "category_id": 3
     },
@@ -407,7 +407,7 @@ seed_project_data = [
     "goal": 9500.00,
     "amount": 4200.00,
     "location": "Atlanta, GA",
-    "media_url": "https://example.com/media/smart-lighting.jpg",
+    "media_url": "https://eshop.se.com/in/media/shoptimize/blog/post/b/l/blog-3_2__1.jpg",
     "deadline": datetime.now() + timedelta(days=65),
     "category_id": 13
     },
@@ -419,7 +419,7 @@ seed_project_data = [
     "goal": 6000.00,
     "amount": 2900.00,
     "location": "Denver, CO",
-    "media_url": "https://example.com/media/ebooks.jpg",
+    "media_url": "https://fliphtml5.com/learning-center/wp-content/uploads/2021/12/BookCreator-for-online-activity-book-creation-1024x592.png",
     "deadline": datetime.now() + timedelta(days=40),
     "category_id": 12
     },
@@ -431,7 +431,7 @@ seed_project_data = [
     "goal": 20000.00,
     "amount": 9100.00,
     "location": "San Jose, CA",
-    "media_url": "https://example.com/media/building-materials.jpg",
+    "media_url": "https://i.ytimg.com/vi/bsQBSVJoV04/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBC-n2u_4-k9NQK2pvNsgea6nA_LA",
     "deadline": datetime.now() + timedelta(days=100),
     "category_id": 3
     },
@@ -443,7 +443,7 @@ seed_project_data = [
     "goal": 15000.00,
     "amount": 6000.00,
     "location": "Orlando, FL",
-    "media_url": "https://example.com/media/music-production.jpg",
+    "media_url": "https://slooply.com/blog/wp-content/uploads/2024/07/image-3-1024x614.png",
     "deadline": datetime.now() + timedelta(days=95),
     "category_id": 10
     },
@@ -455,19 +455,19 @@ seed_project_data = [
     "goal": 4000.00,
     "amount": 2200.00,
     "location": "Boston, MA",
-    "media_url": "https://example.com",
+    "media_url": "https://cdn.imeanmarketing.com/wp-content/uploads/2022/06/AI-email-marketing-1.png",
     "deadline": datetime.now() + timedelta(days=95),
     "category_id": 13
     },
     {
     "user_id": 2,
-    "title": "Music Production Software",
-    "description": "Developing software for digital music production.",
-    "body": "A full suite for recording, editing, and producing music.",
+    "title": "Music Recording Software",
+    "description": "Developing software for digital music recording.",
+    "body": "A full suite for recording music.",
     "goal": 15000.00,
     "amount": 6000.00,
     "location": "Orlando, FL",
-    "media_url": "https://example.com/media/music-production.jpg",
+    "media_url": "https://media.geeksforgeeks.org/wp-content/uploads/20241014025452164972/Free-Music-Recording-Software-.webp",
     "deadline": datetime.now() + timedelta(days=95),
     "category_id": 10
     },
@@ -479,7 +479,7 @@ seed_project_data = [
     "goal": 4000.00,
     "amount": 2200.00,
     "location": "Boston, MA",
-    "media_url": "https://example.com/media/email-marketing.jpg",
+    "media_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB5sTXsOqMX_TCsNO70VkEfnocf25wwAkVxQ&s",
     "deadline": datetime.now() + timedelta(days=50),
     "category_id": 6
     },
@@ -491,7 +491,7 @@ seed_project_data = [
     "goal": 8000.00,
     "amount": 3700.00,
     "location": "New York, NY",
-    "media_url": "https://example.com/media/job-board.jpg",
+    "media_url": "https://freakingnomads.com/content/images/2024/08/remote4me.webp",
     "deadline": datetime.now() + timedelta(days=45),
     "category_id": 4
     },
@@ -503,7 +503,7 @@ seed_project_data = [
     "goal": 25000.00,
     "amount": 10000.00,
     "location": "Los Angeles, CA",
-    "media_url": "https://example.com/media/video-editing.jpg",
+    "media_url": "https://hotpotmedia.s3.us-east-2.amazonaws.com/8-Bsb8T4mI2ysIVmH.png",
     "deadline": datetime.now() + timedelta(days=80),
     "category_id": 6
     },
@@ -515,7 +515,7 @@ seed_project_data = [
     "goal": 5000.00,
     "amount": 1500.00,
     "location": "San Francisco, CA",
-    "media_url": "https://example.com/media/eco-transport.jpg",
+    "media_url": "https://sofy.ai/wp-content/uploads/2024/04/Developing-Eco-Friendly-Mobile-Apps.png",
     "deadline": datetime.now() + timedelta(days=35),
     "category_id": 15
     },
@@ -527,7 +527,7 @@ seed_project_data = [
     "goal": 7000.00,
     "amount": 3000.00,
     "location": "Portland, OR",
-    "media_url": "https://example.com/media/voice-home.jpg",
+    "media_url": "https://www.control4.com/files/large/347d435c5b2ffad",
     "deadline": datetime.now() + timedelta(days=55),
     "category_id": 4
     },
@@ -539,7 +539,7 @@ seed_project_data = [
     "goal": 20000.00,
     "amount": 9200.00,
     "location": "Chicago, IL",
-    "media_url": "https://example.com/media/3d-prosthetics.jpg",
+    "media_url": "https://www.createeducation.com/wp-content/uploads/2021/06/raptorhand.jpg",
     "deadline": datetime.now() + timedelta(days=75),
     "category_id": 3
     },
@@ -551,7 +551,7 @@ seed_project_data = [
     "goal": 15000.00,
     "amount": 6700.00,
     "location": "Seattle, WA",
-    "media_url": "https://example.com/media/investment-ai.jpg",
+    "media_url": "https://www.solulab.com/wp-content/uploads/2024/02/AI-in-Portfolio-Management-1-scaled.jpg",
     "deadline": datetime.now() + timedelta(days=85),
     "category_id": 9
     },
@@ -563,7 +563,7 @@ seed_project_data = [
     "goal": 12000.00,
     "amount": 4500.00,
     "location": "Phoenix, AZ",
-    "media_url": "https://example.com/media/farming.jpg",
+    "media_url": "https://sustainablefarming.com.au/wp-content/uploads/2018/05/SFS-Pyramid-Continuum-e1527683274441.png",
     "deadline": datetime.now() + timedelta(days=70),
     "category_id": 7
     },
@@ -575,7 +575,7 @@ seed_project_data = [
     "goal": 6000.00,
     "amount": 2500.00,
     "location": "Miami, FL",
-    "media_url": "https://example.com/media/online-gallery.jpg",
+    "media_url": "https://www.artplacer.com/wp-content/uploads/2024/03/Camille-1024x593.png",
     "deadline": datetime.now() + timedelta(days=40),
     "category_id": 1
     },
@@ -587,7 +587,7 @@ seed_project_data = [
     "goal": 10000.00,
     "amount": 4200.00,
     "location": "Seattle, WA",
-    "media_url": "https://example.com/media/card-battler.jpg",
+    "media_url": "https://i.etsystatic.com/43122232/r/il/f9ac24/5224994468/il_570xN.5224994468_evxc.jpg",
     "deadline": datetime.now() + timedelta(days=60),
     "category_id": 8
     },
@@ -599,7 +599,7 @@ seed_project_data = [
     "goal": 20000.00,
     "amount": 8500.00,
     "location": "Austin, TX",
-    "media_url": "https://example.com/media/survival-rpg.jpg",
+    "media_url": "https://assets.apk.live/com.bewgames.openworld--3000014-screenshot6.png",
     "deadline": datetime.now() + timedelta(days=90),
     "category_id": 8
     },
@@ -611,7 +611,7 @@ seed_project_data = [
     "goal": 15000.00,
     "amount": 5000.00,
     "location": "San Francisco, CA",
-    "media_url": "https://example.com/media/vr-puzzle.jpg",
+    "media_url": "https://zybervr.com/cdn/shop/articles/best-vr-puzzle-games-2023.jpg?v=1685018117",
     "deadline": datetime.now() + timedelta(days=75),
     "category_id": 8
     },
@@ -623,7 +623,7 @@ seed_project_data = [
     "goal": 12000.00,
     "amount": 4600.00,
     "location": "Chicago, IL",
-    "media_url": "https://example.com/media/mystery-adventure.jpg",
+    "media_url": "https://play-lh.googleusercontent.com/7K3ra4w7OGlYDKghmsj_JkRPjp1YaHf8DxB_LJCgzqFjVjPfpYTnBvOawNLZr-jHyxI=w526-h296-rw",
     "deadline": datetime.now() + timedelta(days=50),
     "category_id": 8
     },
@@ -635,7 +635,7 @@ seed_project_data = [
     "goal": 5000.00,
     "amount": 2000.00,
     "location": "Los Angeles, CA",
-    "media_url": "https://example.com/media/arcade-platformer.jpg",
+    "media_url": "https://img.youtube.com/vi/UghOQ-jxbic/0.jpg",
     "deadline": datetime.now() + timedelta(days=30),
     "category_id": 8
     },
@@ -647,7 +647,7 @@ seed_project_data = [
         "goal": 7000.00,
         "amount": 3200.00,
         "location": "Portland, OR",
-        "media_url": "https://example.com/media/pixel-roguelike.jpg",
+        "media_url": "https://opengameart.org/sites/default/files/Dungeon_0.gif",
         "deadline": datetime.now() + timedelta(days=40),
         "category_id": 8
     },
@@ -659,7 +659,7 @@ seed_project_data = [
         "goal": 8000.00,
         "amount": 4500.00,
         "location": "Denver, CO",
-        "media_url": "https://example.com/media/kids-game.jpg",
+        "media_url": "https://stemgame.lili.org/images/gameboard.png",
         "deadline": datetime.now() + timedelta(days=50),
         "category_id": 8
     },
@@ -671,7 +671,7 @@ seed_project_data = [
         "goal": 20000.00,
         "amount": 9800.00,
         "location": "Miami, FL",
-        "media_url": "https://example.com/media/space-strategy.jpg",
+        "media_url": "https://assetsio.gnwcdn.com/everspace-2-review-2.jpg?width=1200&height=1200&fit=bounds&quality=70&format=jpg&auto=webp",
         "deadline": datetime.now() + timedelta(days=90),
         "category_id": 8
     },
@@ -683,7 +683,7 @@ seed_project_data = [
         "goal": 15000.00,
         "amount": 6200.00,
         "location": "New York, NY",
-        "media_url": "https://example.com/media/rhythm-combat.jpg",
+        "media_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1198400/header.jpg?t=1662016069",
         "deadline": datetime.now() + timedelta(days=70),
         "category_id": 8
     },
@@ -695,7 +695,7 @@ seed_project_data = [
         "goal": 12000.00,
         "amount": 5400.00,
         "location": "Chicago, IL",
-        "media_url": "https://example.com/media/monster-rpg.jpg",
+        "media_url": "https://i.redd.it/you-may-not-know-about-this-monster-taming-game-v0-th2ygdf91auc1.jpg?width=2796&format=pjpg&auto=webp&s=0e5c58285fbe2777b93483c1aac959a536a3c6e5",
         "deadline": datetime.now() + timedelta(days=65),
         "category_id": 8
     },
@@ -707,7 +707,7 @@ seed_project_data = [
         "goal": 10000.00,
         "amount": 4100.00,
         "location": "Boston, MA",
-        "media_url": "https://example.com/media/visual-novel.jpg",
+        "media_url": "https://emmarie.sites.gettysburg.edu/visual-novels/wp-content/uploads/2019/07/DECISION2-1024x574.png", #change later for copyright issues
         "deadline": datetime.now() + timedelta(days=60),
         "category_id": 8
     },
@@ -719,7 +719,7 @@ seed_project_data = [
         "goal": 6000.00,
         "amount": 3100.00,
         "location": "San Diego, CA",
-        "media_url": "https://example.com/media/arcade-shooter.jpg",
+        "media_url": "https://static.vecteezy.com/system/resources/thumbnails/005/569/670/small_2x/retro-pixel-space-game-interface-free-vector.jpg",
         "deadline": datetime.now() + timedelta(days=45),
         "category_id": 8
     },
@@ -731,7 +731,7 @@ seed_project_data = [
         "goal": 18000.00,
         "amount": 8500.00,
         "location": "Philadelphia, PA",
-        "media_url": "https://example.com/media/asymmetrical-multiplayer.jpg",
+        "media_url": "https://images.squarespace-cdn.com/content/v1/55ef0e29e4b099e22cdc9eea/52d347eb-801f-4973-a493-891ef0b687b8/ss1+%281%29.jpg?format=500w",
         "deadline": datetime.now() + timedelta(days=85),
         "category_id": 8
     },
@@ -743,7 +743,7 @@ seed_project_data = [
         "goal": 14000.00,
         "amount": 6900.00,
         "location": "Seattle, WA",
-        "media_url": "https://example.com/media/puzzle-platformer.jpg",
+        "media_url": "https://assets.funnygames.org/3/113403/94269/672x448/physics-drop.webp",
         "deadline": datetime.now() + timedelta(days=75),
         "category_id": 8
     },
@@ -755,7 +755,7 @@ seed_project_data = [
         "goal": 20000.00,
         "amount": 9200.00,
         "location": "Austin, TX",
-        "media_url": "https://example.com/media/dungeon-crawler.jpg",
+        "media_url": "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/11/mixcollage-07-nov-2024-04-49-pm-4916.jpg",
         "deadline": datetime.now() + timedelta(days=100),
         "category_id": 8
     }

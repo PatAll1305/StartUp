@@ -16,7 +16,7 @@ export default function HomePage() {
     user?.id ? null : restoreCSRF()
 
     const sortedProjects = [...projects].sort((a, b) => a.amount - b.amount);
-    const userProjects = user ? sortedProjects.filter(project => project.user_id === user.id) : [];
+    const userProjects = user ? sortedProjects.filter(project => project?.user_id === user.id) : [];
 
     useEffect(() => {
         dispatch(fetchProjects());
@@ -29,10 +29,10 @@ export default function HomePage() {
                 <div className="your-projects">
                     <h2>Your Projects</h2>
                     {userProjects.length > 0 ? (
-                        <div className="project-grid">
+                        <div className="personal-project-grid">
                             {userProjects.map((project) => (
-                                <div key={project.id} className="project-card" onClick={() => navigate(`/projects/${project.id}`)}>
-                                    <h3>{project.title}</h3>
+                                <div key={project?.id} className="personal-project-card" onClick={() => navigate(`/projects/${project?.id}`)}>
+                                    <h3>{project?.title}</h3>
                                     <p>Currently at: ${parseFloat(project.amount).toFixed(2)}</p>
                                 </div>))}
                         </div>
@@ -46,10 +46,10 @@ export default function HomePage() {
             <h2> Projects by Category:</h2>
             {Object.entries(
                 sortedProjects.reduce((acc, project) => {
-                    if (!acc[project.category_id]) {
-                        acc[project.category_id] = [];
+                    if (!acc[project?.category_id]) {
+                        acc[project?.category_id] = [];
                     }
-                    acc[project.category_id].push(project);
+                    acc[project?.category_id].push(project);
                     return acc;
                 }, {})
             ).map(([categoryId, projects]) => (
@@ -57,9 +57,12 @@ export default function HomePage() {
                     <h3>{categories[categoryId]?.title}</h3>
                     <div className="project-grid">
                         {projects.map((project) => (
-                            <div key={project.id} className="project-card" onClick={() => navigate(`/projects/${project.id}`)}>
-                                <h3>{project.title}</h3>
-                                <p>Currently at: ${parseFloat(project.amount).toFixed(2)}</p>
+                            <div key={project?.id} className="project-card" onClick={() => navigate(`/projects/${project?.id}`)}>
+                                <img className='project-image' src={project?.media_url} alt={project.title} />
+                                <div className='project-description'>
+                                    <h3>{project?.title}</h3>
+                                    <p>Currently at: ${parseFloat(project.amount).toFixed(2)}</p>
+                                </div>
                             </div>
                         ))}
                     </div>

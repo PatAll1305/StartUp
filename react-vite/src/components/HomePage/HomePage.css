@@ -9,11 +9,26 @@
 
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 6fr));
+    gap: 50px;
+}
+
+.personal-project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 30px
 }
 
 .project-card {
+    border: 1px solid #ccc;
+    width: 200px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.personal-project-card {
     border: 1px solid #ccc;
     padding: 15px;
     text-align: center;
@@ -43,5 +58,6 @@
 .project-card:hover {
     cursor: pointer;
     transition: all 0.4s ease;
-    transform: translateY(10px);
+    transform: translateY(-10px);
+    z-index: 1;
 }
