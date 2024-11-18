@@ -8,8 +8,6 @@ export default function ConfirmCancelBackingModal({ backing }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
 
-    console.log("backing", backing)
-
     const handleConfirmCancel = () => {
         try {
             dispatch(deleteBacking(backing.id));

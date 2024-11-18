@@ -66,7 +66,6 @@ def update_project(id):
     project = Project.query.get_or_404(id)
     data = request.get_json()
 
-    print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++', data.get('amount'))
     project.body = data.get('body', project.body)
     project.location = data.get('location', project.location)
     project.title = data.get('title', project.title)

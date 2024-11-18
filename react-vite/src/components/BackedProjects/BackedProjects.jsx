@@ -54,7 +54,7 @@ export default function BackedProjects() {
                                 <div key={project?.id} className="backed-project-card" >
                                     <h3 onClick={() => { navigate(`/projects/${project?.id}`) }}>{project?.title}</h3>
                                     <p onClick={() => { navigate(`/projects/${project?.id}`) }}>{project?.description}</p>
-                                    <p onClick={() => { navigate(`/projects/${project?.id}`) }}>Currently at: ${(project.amount).toFixed(2)}</p>
+                                    <p onClick={() => { navigate(`/projects/${project?.id}`) }}>Currently at: ${Number(project?.amount).toFixed(2)}</p>
                                     <p onClick={() => { navigate(`/projects/${project?.id}`) }}>You donated: ${Number(backing?.donation_amount).toFixed(2)}</p>
                                     <button
                                         className="change-pledge-button"

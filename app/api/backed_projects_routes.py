@@ -73,7 +73,6 @@ def update_backed_project(id):
     data = request.get_json()
     
     if not data or not isinstance(data, dict):
-        print('++++++++++++++++++++++++',data)
         return jsonify({"error": "Invalid data format"}), 400
 
     backed_project = BackedProject.query.get(id)

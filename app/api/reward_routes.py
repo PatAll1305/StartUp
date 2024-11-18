@@ -10,7 +10,6 @@ def check_reward_ownership(func):
     def wrapper(*args, **kwargs):
         project_id = kwargs.get('id')
         user_id = request.headers.get('user_id')
-        print(f"Project ID: {project_id}, User ID: {user_id}")
         if user_id == None:
             user_id = request.cookies.get('user_id')
         headers_project_id = request.headers.get('project_id')
@@ -39,7 +38,6 @@ def get_rewards():
 @check_reward_ownership
 def create_reward():
     data = request.get_json()
-    print(data)
     new_reward = Reward(
         project_id = data['project_id'],
         pledge = data['pledge'],
