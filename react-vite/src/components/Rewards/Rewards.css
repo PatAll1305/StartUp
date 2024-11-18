@@ -51,3 +51,8 @@ button:hover {
         cursor: pointer;
     }
 }
+.reward-errors {
+    font-size: x-large;
+    color: red;
+    margin-bottom: 0.5rem;
+}

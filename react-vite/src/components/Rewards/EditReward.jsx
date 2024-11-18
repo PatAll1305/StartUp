@@ -24,9 +24,9 @@ const EditReward = () => {
     useEffect(() => {
         const errors = {}
 
-        if(pledge < 0) errors.pledge = 'Pledge is required'
-        if(name?.length < 0) errors.name = 'Name is required'
-        if(content?.length < 30) errors.name = 'Content must be at least 30 characters'
+        if(Number(pledge) < 1) errors.pledge = 'Pledge is required'
+        if(name?.length < 3) errors.name = 'Name must be at least 3 characters'
+        if(content?.length < 30) errors.content = 'Content must be at least 30 characters'
 
         setErrors(errors)
 
@@ -54,20 +54,20 @@ const EditReward = () => {
         <div className="create-reward">
             <h1> Edit your Reward </h1>
             <form onSubmit={handleSubmit} className="create-reward-form">
+                    {submitted && errors.name && <p className="reward-errors"> {errors.name}</p>}
                 <label className="name">
                     Name:
                     <input type="text" value={name} onChange={(e) => {setName(e.target.value)}} required />
-                    {submitted && errors.name && <p> {errors.name}</p>}
                 </label>
+                    {submitted && errors.pledge && <p className="reward-errors"> {errors.pledge}</p>}
                 <label className="pledge">
                     Pledge:
                     <input type="number" value={pledge} onChange={(e) => {setPledge(e.target.value)}} required />
-                    {submitted && errors.number && <p> {errors.number}</p>}
                 </label>
+                    {submitted && errors.content && <p className="reward-errors"> {errors.content}</p>}
                 <label className="content">
                     Content:
                     <textarea value={content} onChange={(e) => {setContent(e.target.value)}} required />
-                    {submitted && errors.submitted && <p> {errors.content}</p>}
                 </label>
                 <button type="submit">Save Reward!</button>
             </form>
