@@ -18,6 +18,7 @@ const Rewards = () => {
     const currentOwner = user && user.id === project.user_id;
     const navigate = useNavigate()
     const location = useLocation()
+    console.log(projectId)
 
     useEffect(() => {
         dispatch(getRewardsThunk())
@@ -44,10 +45,11 @@ const Rewards = () => {
                                 className="update-reward"
                                 onClick={() => {navigate(`/projects/${projectId}/rewards/${reward.id}/edit`)}}>Edit Reward</button
                             >
-                            <button
+
+                            <OpenModalButton
                             className="delete-reward"
-                            ><OpenModalButton
-                            modalComponent={<ConfirmDeleteReward rewardId={reward.id} userId={user[1]} projectId={projectId}/>} itemText={'Delete'} />Delete</button>
+                            buttonText='Delete'
+                            modalComponent={<ConfirmDeleteReward rewardId={reward.id} userId={user.id} projectId={+projectId}/>} itemText={'Delete'} />
                         </div>
                         </>
                     )}
