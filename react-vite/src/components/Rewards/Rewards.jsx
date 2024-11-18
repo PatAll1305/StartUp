@@ -16,7 +16,7 @@ const Rewards = () => {
         Object.values(state.rewards).filter((reward) => reward.project_id === Number(projectId)))
     const user = useSelector((state) => (state.session.user))
     const project = useSelector((state) => (state.projects[projectId]))
-    const currentOwner = user && user.id === project.user_id;
+    const currentOwner = user && user.id === project?.user_id;
     const navigate = useNavigate()
     const location = useLocation()
 
