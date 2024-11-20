@@ -51,6 +51,7 @@ export default function ChangeBacking() {
             }
         }
         navigate(`/user/${userId}/backed-projects`);
+        window.location.reload()
     };
 
     return (

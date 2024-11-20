@@ -41,40 +41,42 @@ export default function BackedProjects() {
 
     return (
         <div className="backed-projects-container">
-            <h2 onClick={() => { navigate(-1) }} id='back-button' >{`< Back`}</h2>
-            {Object.entries(projectsByCategory).map(([category, projects]) => (
+            <h2 onClick={() => navigate(-1)} id="back-button">{`< Back`}</h2>
+            {Object.entries(
+                Object.values(backedProjects).reduce((acc, backing) => {
+                    const category = backing.project?.category || "Uncategorized";
+                    if (!acc[category]) acc[category] = [];
+                    acc[category].push(backing);
+                    return acc;
+                }, {})
+            ).map(([category, backings]) => (
                 <div key={category} className="category-section">
                     <h2>{category}</h2>
                     <div className="backed-projects-list">
-                        {projects?.map((project) => {
-                            const backing = Object.values(backedProjects).find(
-                                (bp) => bp.project_id === project?.id
-                            );
+                        {backings.map((backing) => {
+                            const project = backing.project;
                             return (
-                                <div key={project?.id} className="backed-project-card" >
-                                    <h3 onClick={() => { navigate(`/projects/${project?.id}`) }}>{project?.title}</h3>
-                                    <p onClick={() => { navigate(`/projects/${project?.id}`) }}>{project?.description}</p>
-                                    <p onClick={() => { navigate(`/projects/${project?.id}`) }}>Currently at: ${Number(project?.amount).toFixed(2)}</p>
-                                    <p onClick={() => { navigate(`/projects/${project?.id}`) }}>You donated: ${Number(backing?.donation_amount).toFixed(2)} on {String(backing?.created_at).split(' ', 3).join(' ')}</p>
+                                <div key={backing.id} className="backed-project-card">
+                                    <h3 onClick={() => navigate(`/projects/${project?.id}`)}>{project?.title}</h3>
+                                    <p onClick={() => navigate(`/projects/${project?.id}`)}>{project?.description}</p>
+                                    <p onClick={() => navigate(`/projects/${project?.id}`)}>Currently at: ${Number(project?.amount).toFixed(2)}</p>
+                                    <p onClick={() => navigate(`/projects/${project?.id}`)}>You donated: ${Number(backing?.donation_amount).toFixed(2)} on {String(backing?.created_at).split(' ', 3).join(' ')}</p>
                                     <button
                                         className="change-pledge-button"
                                         onClick={(e) => {
-                                            e.preventDefault()
-                                            handleChangePledgeClick(backing.id)
-                                        }
-                                        }
+                                            e.preventDefault();
+                                            handleChangePledgeClick(backing.id);
+                                        }}
                                     >
                                         Change Pledge
                                     </button>
-                                    {backing && (
-                                        <OpenModalButton
-                                            buttonText="Cancel Backing"
-                                            modalComponent={
-                                                <ConfirmCancelBackingModal backing={backing} />
-                                            }
-                                            className="cancel-backing-button"
-                                        />
-                                    )}
+                                    <OpenModalButton
+                                        buttonText="Cancel Backing"
+                                        modalComponent={
+                                            <ConfirmCancelBackingModal backing={backing} />
+                                        }
+                                        className="cancel-backing-button"
+                                    />
                                 </div>
                             );
                         })}

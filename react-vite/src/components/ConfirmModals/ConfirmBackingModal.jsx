@@ -19,7 +19,7 @@ export default function ConfirmBackingModal({ reward, project, donationAmount, u
                 donation_amount: reward ? null : Number(donationAmount).toFixed(2)
             };
             dispatch(backProject(payload, project?.id));
-            dispatch(updateProject(project?.id, { amount: !reward ? Number(project?.amount + +donationAmount).toFixed(2) : Number(project?.amount + +reward?.pledge).toFixed(2) }, project.user_id))
+            dispatch(updateProject(project?.id, { amount: !reward ? Number(+project?.amount + +donationAmount).toFixed(2) : Number(+project?.amount + +reward?.pledge).toFixed(2) }, project.user_id))
             navigate(`/user/${userId}/backed-projects`);
             closeModal();
         } else {
