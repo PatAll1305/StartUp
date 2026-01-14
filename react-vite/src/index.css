@@ -1,1 +1,19 @@
 /* TODO: Add sitewide styles */
+
+:root {
+  --bg-main: #ECFDF5;
+
+  --surface-primary: #FFFFFF;
+  --surface-secondary: #F0FDFA;
+
+  --text-primary: #1F2937;
+  --text-on-green: #FFFFFF;
+  --text-muted: #E6FFFA;
+
+  --green-accent: #38A169;
+  --green-border: #C6F6D5;
+}
+
+body {
+  background-color: var(--bg-main);
+}
